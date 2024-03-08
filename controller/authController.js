@@ -1,9 +1,10 @@
 const User = require('../model/user-model');
 const bcrypt = require('bcrypt')
 
+
 const loadLogIn = (req, res) => {
     try {
-        res.json({ load: "login Pages" })
+        res.render('login');
     } catch (error) {
         console.error("error on loadLogIn", error);
         res.status(401).send({ error: error.message });
@@ -11,12 +12,21 @@ const loadLogIn = (req, res) => {
 }
 const loadSignup = (req, res) => {
     try {
-        res.json({ load: "signupPage" })
+        res.render('signup');
     } catch (error) {
         console.log("error on loadSignup", error);
         res.status(501).send({ error: error.message })
     }
 }
+const home = (req, res) => {
+    try {
+        res.render('home');
+    } catch (error) {
+        console.log("error on loadSignup", error);
+        res.status(501).send({ error: error.message })
+    }
+}
+
 const handleLogIn = async (req, res) => {
     try {
         const { mobile ,password} = req.body;
@@ -27,7 +37,7 @@ const handleLogIn = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            res.json({ message: "Login successful." });
+            res.render('home');
         } else {
             res.status(401).json({ error: "Invalid password." });
         }
@@ -64,9 +74,12 @@ const handleSingUp = async (req, res) => {
         res.status(401).send({ error: error.message })
     }
 }
+
+
 module.exports = {
     loadLogIn,
     handleSingUp,
     handleLogIn,
-    loadSignup
+    loadSignup,
+    home
 }

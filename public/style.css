@@ -1,0 +1,174 @@
+body {
+    padding: 0px 20px;
+    background-image: url(../img/body-bg.png);
+    background-size: cover;
+    /* background: radial-gradient(rgb(138, 51, 219), rgb(255, 255, 255)); */
+
+}
+
+.sec-1-para {
+    font-size: 13px;
+    text-align: center;
+    position: relative;
+    top: 200px;
+}
+
+.satartbutton {
+    border-radius: 50px;
+    margin-top: 120px !important;
+
+}
+
+.button-p {
+    color: white;
+
+}
+
+.button-1 {
+    border: none;
+    width: 180px;
+    height: 180px;
+    background-color: rgb(138, 51, 219);
+    border-radius: 100px;
+    transition: background-color 0.4s ease;
+    animation: blink 2s infinite alternate;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(14, 13, 13, 0.1);
+    /* Add a more prominent box shadow */
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.5;
+    }
+}
+
+
+.satartbutton {
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.button-text {
+    color: white;
+
+}
+
+.nav-button {
+
+    width: 20%;
+}
+
+
+
+.main-content {
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .4);
+    margin: 5em auto;
+    display: flex;
+}
+
+.company__info {
+    background-color: #008080;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+}
+
+.fa-android {
+    font-size: 3em;
+}
+
+@media screen and (max-width: 640px) {
+    .main-content {
+        width: 90%;
+    }
+
+    .company__info {
+        display: none;
+    }
+
+    .login_form {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+}
+
+@media screen and (min-width: 642px) and (max-width:800px) {
+    .main-content {
+        width: 70%;
+    }
+}
+
+.form-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    padding: 30px;
+  }
+  .form-container h2 {
+    color: #333;
+  }
+  .form-container label {
+    color: #555;
+  }
+  .form-container input[type="text"],
+  .form-container input[type="Mobile"],
+  .form-container input[type="password"] {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+  }
+  .form-container input[type="text"]:focus,
+  .form-container input[type="Mobile"]:focus,
+  .form-container input[type="password"]:focus {
+    background-color: #ffffff;
+    border: 1px solid #80bdff;
+  }
+  .form-container button[type="submit"] {
+    background-color: rgb(138, 51, 219);
+    color: white;
+    border: none;
+    margin-top: 15px;
+    justify-content: center;
+  }
+  .form-container button[type="submit"]:hover {
+    background-color:white ;
+    color:   rgb(138, 51, 219);
+  }
+
+
+
+@media screen and (max-width: 768px) {
+    .button-1 {
+        width: 190px;
+        height: 190px;
+        padding: 15px;
+        border-radius: 50%;
+    }
+
+    .button-p {
+        font-size: 13px;
+
+    }
+}
+
+@media screen and (max-width: 270px) {
+    .button-1 {
+        width: 140px;
+        height: 140px;
+        padding: 18px;
+        border-radius: 50%;
+    }
+
+    .button-p {
+        font-size: 9px;
+
+    }
+}
