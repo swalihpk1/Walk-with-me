@@ -20,7 +20,9 @@ userRoutes.get('/',authMiddleware.isLogin,authController.home);
 userRoutes.get('/signup',authMiddleware.isLogout,authController.loadSignup);
 userRoutes.post('/signup',authMiddleware.isLogout,authController.handleSingUp);
 userRoute.get('/safetymap',authMiddleware.isLogin, mapController.safetyMap);
+userRoutes.patch('/verifyOtp',authController.verifyOtp)
 userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
+
 userRoutes.get('/check-point',userMessageController.reachCheckPoint)
 
 module.exports = userRoutes;
