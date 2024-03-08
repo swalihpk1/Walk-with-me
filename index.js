@@ -6,6 +6,8 @@ dotenv.config();
 const mongoose = require("mongoose");
 mongoose.connect(process.env.DB_CONNECTION, console.log("db connected")).then("mongo sussess").catch("somrthing wrong");
 // ----------------------------
+const mapRouter = require('./routes/mapRoute');
+
 
 //expess
 const express = require("express");
@@ -23,6 +25,9 @@ app.use(nocache());
 // bodyParser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+
+
+app.use('/app',mapRouter);
 
 
 const userRoutes = require('./routes/userRoute');
