@@ -15,9 +15,21 @@ const nocache = require("nocache");
 
 app.use(nocache());
 
+app.use(express.static('public'))
+
+app.set('view engine','ejs')
+
+app.get('/', function(req, res) {
+    res.render('index');
+});
+
 // bodyParser
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+
+
+const userRoute = require('./routes/userRoute');
+app.use('/',userRoute)
 
 
 app.listen(3000, () => {

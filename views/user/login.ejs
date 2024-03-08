@@ -1,0 +1,26 @@
+<%- include('../layouts/header.ejs') -%>
+<main>
+
+    
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="form-container">
+          <h2 class="mb-4 text-center">login</h2>
+          <form id="registrationForm">
+            <div class="form-group">
+              <label for="email">Mobile</label>
+              <input type="number" class="form-control" id="Mobile" name="Mobile" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<%- include('../layouts/footer.ejs') -%>
