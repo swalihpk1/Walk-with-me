@@ -11,6 +11,11 @@ mongoose.connect(process.env.DB_CONNECTION, console.log("db connected")).then("m
 const express = require("express");
 const app = express();
 const nocache = require("nocache");
+const morgan = require('morgan');
+
+//Morgan
+const customFormat = ':method :url :status :res[content-length] - :response-time ms';
+app.use(morgan(customFormat));
 
 
 app.use(nocache());
@@ -19,6 +24,9 @@ app.use(nocache());
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
 
+
+const userRoutes = require('./routes/userRoute');
+app.use('/', userRoutes)
 
 app.listen(3000, () => {
     console.log('Server running...')
