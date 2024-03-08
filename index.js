@@ -1,16 +1,24 @@
+
 const dotenv = require("dotenv");
 dotenv.config();
-// ----------------------------
 
 // Database connection
 const mongoose = require("mongoose");
-mongoose.connect(process.env.DB_CONNECTION, console.log("db connected")).then("mongo sussess").catch("somrthing wrong");
+mongoose.connect(process.env.DB_CONNECTION)
+    .then(() => {
+        console.log("Database connected");
+    })
+    .catch((error) => {
+        console.error("Something went wrong:", error);
+    });
 // ----------------------------
+const mapRouter = require('./routes/mapRoute');
 
-//expess
+// Express
 const express = require("express");
 const app = express();
 const nocache = require("nocache");
+const cors = require("cors");
 const morgan = require('morgan');
 const session = require('express-session')
 
@@ -25,15 +33,21 @@ app.use(session({
   }));
 
 app.use(nocache());
+app.use(cors())
 
-// bodyParser
-app.use(express.urlencoded({ extended: true }))
+// Body parser
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const userRoute = require("./routes/userRoute");
+app.use('/', userRoute);
+
+app.use('/app',mapRouter);
 
 
 const userRoutes = require('./routes/userRoute');
 app.use('/', userRoutes)
 
 app.listen(3000, () => {
-    console.log('Server running...')
+    console.log('Server running on port 3000...');
 });

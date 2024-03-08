@@ -1,9 +1,15 @@
-const express = require('express');
+const express = require("express");
 const userRoutes = express();
+
 
 const authController = require('../controller/authController');
 const userMessageController = require('../controller/userMessageController')
 const authMiddleware = require('../middlewares/authMiddlewares');
+const alertController = require("../controller/alertsController");
+
+
+userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
+
 
 userRoutes.get('/', authMiddleware.isLogout, authController.loadLogIn);
 userRoutes.post('/', authMiddleware.isLogout, authController.handleLogIn)
