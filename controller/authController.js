@@ -97,7 +97,7 @@ const loadOtpPage = async (req, res) => {
         res.json({ load: "otp page Loaded" })
     } catch (error) {
         console.error("Error on loadOtpPage", error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });ver
     }
 }
 
