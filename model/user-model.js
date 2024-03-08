@@ -15,8 +15,14 @@ const user = new mongoose.Schema({
         required: true
     },
     emergency_contacts: [{
-        type:Number,
+        type: Number,
+        required: true
+    }],
+    password:{
+        type:String,
         required:true
-    }]
+    }
 
 })
+
+module.exports = mongoose.model('users',user);
