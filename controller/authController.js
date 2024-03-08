@@ -27,6 +27,7 @@ const handleLogIn = async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
+            req.session.user_id = user._id;
             res.json({ message: "Login successful." });
         } else {
             res.status(401).json({ error: "Invalid password." });
@@ -64,9 +65,19 @@ const handleSingUp = async (req, res) => {
         res.status(401).send({ error: error.message })
     }
 }
+const loadHome =async (req,res)=>{
+    try {
+        let user = await User.findOne({_id:req.session.user_id})
+        res.send({message:`Home @ ${user.name}`});
+    } catch (error) {
+        console.log("error on home page:",error);
+        res.status(401).send({error:error.message})
+    }
+}
 module.exports = {
     loadLogIn,
     handleSingUp,
     handleLogIn,
-    loadSignup
+    loadSignup,
+    loadHome
 }
