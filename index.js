@@ -13,6 +13,7 @@ mongoose.connect(process.env.DB_CONNECTION)
     });
 // ----------------------------
 const mapRouter = require('./routes/mapRoute');
+const userRoute = require("./routes/userRoute");
 
 // Express
 const express = require("express");
@@ -35,18 +36,20 @@ app.use(session({
 app.use(nocache());
 app.use(cors())
 
+app.use(express.static('public'))
+
+app.set('view engine','ejs')
+app.set('views', './views/user')
+
 // Body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const userRoute = require("./routes/userRoute");
+
 app.use('/', userRoute);
 
 app.use('/app',mapRouter);
 
-
-const userRoutes = require('./routes/userRoute');
-app.use('/', userRoutes)
 
 app.listen(3000, () => {
     console.log('Server running on port 3000...');

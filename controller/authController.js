@@ -1,9 +1,10 @@
 const User = require('../model/user-model');
 const bcrypt = require('bcrypt')
 
+
 const loadLogIn = (req, res) => {
     try {
-        res.json({ load: "login Pages" })
+        res.render('login');
     } catch (error) {
         console.error("error on loadLogIn", error);
         res.status(401).send({ error: error.message });
@@ -11,12 +12,22 @@ const loadLogIn = (req, res) => {
 }
 const loadSignup = (req, res) => {
     try {
-        res.json({ load: "signupPage" })
+        res.render('signup');
     } catch (error) {
         console.log("error on loadSignup", error);
         res.status(501).send({ error: error.message })
     }
 }
+const home = async(req, res) => {
+    try {
+        let user = await User.findOne({_id:req.session.user_id})
+        res.render('home',{user});
+    } catch (error) {
+        console.log("error on loadSignup", error);
+        res.status(501).send({ error: error.message })
+    }
+}
+
 const handleLogIn = async (req, res) => {
     try {
         const { mobile ,password} = req.body;
@@ -28,7 +39,7 @@ const handleLogIn = async (req, res) => {
 
         if (passwordMatch) {
             req.session.user_id = user._id;
-            res.json({ message: "Login successful." });
+            res.render('home');
         } else {
             res.status(401).json({ error: "Invalid password." });
         }
@@ -65,19 +76,11 @@ const handleSingUp = async (req, res) => {
         res.status(401).send({ error: error.message })
     }
 }
-const loadHome =async (req,res)=>{
-    try {
-        let user = await User.findOne({_id:req.session.user_id})
-        res.send({message:`Home @ ${user.name}`});
-    } catch (error) {
-        console.log("error on home page:",error);
-        res.status(401).send({error:error.message})
-    }
-}
+
 module.exports = {
     loadLogIn,
     handleSingUp,
     handleLogIn,
     loadSignup,
-    loadHome
+    home
 }
