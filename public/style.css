@@ -14,7 +14,7 @@ body {
 }
 
 .gradient-box {
-    background: linear-gradient(to bottom,rgba(255, 255, 255, 0),rgba(255, 255, 255, 1));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     width: 100%;
     height: 8rem
 }
@@ -38,12 +38,12 @@ body {
 }
 
 .journeyDetails {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Gradient background */
+    background: white;
     width: 100%;
     color: darkmagenta;
-    padding: 10px; /* Add padding to give some space around the content */
-    border-radius: 5px; /* Add border radius for rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px -15px 20px 11px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -54,15 +54,37 @@ body {
 }
 
 .touchTxt {
-    color: darkmagenta;output.innerHTML = "<div class='journeyDetails'>" + ".<br /><span style='background-color: darkmagenta; color: white; border-radius: 20px; padding: 5px 10px;'>" + result.routes[0].legs[0].distance.text + "</span>.<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-
+    color: darkmagenta;
     position: relative;
 }
+
+
 
 .button-p {
     color: white;
     font-size: 22px;
 
+}
+
+.dropdown-container {
+    z-index: 999;
+    /* Ensure dropdown is on top of other components */
+    background-color: #fff;
+    /* Set background color for the dropdown */
+    border-radius: 5px;
+    /* Add rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Add subtle shadow */
+}
+
+.dimmer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black overlay */
 }
 
 .button-1 {
@@ -260,6 +282,7 @@ body {
 .form-container button[type="submit"]:hover {
     background-color: white;
     color: rgb(138, 51, 219);
+    font-size: x-large;
 }
 
 
@@ -284,6 +307,11 @@ body {
 
     .homeQoute {
         font-size: 35px;
+    }
+
+    .form-container {
+        font-size: large;
+        padding: 14px;
     }
 }
 
@@ -315,6 +343,11 @@ body {
     .homeQoute {
         font-size: 30px;
     }
+
+    .form-container {
+        font-size: larger;
+        padding: 14px;
+    }
 }
 
 
@@ -345,6 +378,11 @@ body {
     .homeQoute {
         font-size: 25px;
     }
+
+    .form-container {
+        font-size: medium;
+        padding: 14px;
+    }
 }
 
 
@@ -368,6 +406,15 @@ body {
 
     .homeQoute {
         font-size: 25px;
+    }
+
+    .form-container {
+        font-size: small;
+        padding: 14px;
+    }
+
+    .form-control {
+        font-size: 14px !important;
     }
 }
 
@@ -395,6 +442,19 @@ body {
         font-size: 20px;
     }
 
+    .registerBtn {
+        font-size: x-large;
+    }
+
+    .form-container {
+        font-size: smaller;
+        padding: 14px;
+    }
+
+    .form-control {
+        font-size: 12px !important;
+    }
+
 
     @media screen and (min-width: 100px) {
         .button-1 {
@@ -418,5 +478,18 @@ body {
             font-size: 48px;
             font-style: italic;
         }
+
+        .form-container {
+            font-size: x-small;
+            padding: 14px;
+        }
+
+        .form-control {
+            font-size: 10px !important;
+        }
+
+        /* .form-container button[type="submit"]:hover {
+            font-size: x-large;
+        } */
     }
 }

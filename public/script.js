@@ -133,6 +133,13 @@ function calcRoute() {
                 // Display route
                 directionsDisplay.setDirections(result);
                 startLiveTracking(); // Start live tracking after route calculation
+
+                setTimeout(function () {
+                    $("#dropdown-container").removeClass("d-none");
+                    $("#dimmer-overlay").removeClass("d-none");
+                }, 2000);
+
+
             } else {
                 // Delete route from map
                 directionsDisplay.setDirections({ routes: [] });
@@ -145,6 +152,18 @@ function calcRoute() {
         });
     })
 }
+
+function submitNumber() {
+    // Handle the submitted number from the dropdown
+    const number = $("#dropdown-number").val();
+    console.log("Submitted number:", number);
+
+    // Hide the dropdown and dimmer after submission
+    $("#dropdown-container").addClass("d-none");
+    $("#dimmer-overlay").addClass("d-none");
+}
+
+
 
 //create autocomplete objects for all inputs
 var options = {
@@ -248,6 +267,8 @@ function stopLiveTracking() {
         marker = undefined; // Reset marker variable
     }
 }
+
+
 
 // Constants
 const ARRIVAL_THRESHOLD = 50; // Threshold distance (in meters) within which user is considered to have arrived
