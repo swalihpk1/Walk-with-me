@@ -25,16 +25,18 @@ body {
 }
 
 .button-1 {
-    border: none;
-    width: 180px;
-    height: 180px;
-    background-color: rgb(138, 51, 219);
-    border-radius: 100px;
-    transition: background-color 0.4s ease;
-    animation: blink 2s infinite alternate;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(14, 13, 13, 0.1);
-    /* Add a more prominent box shadow */
+  border: none;
+  width: 180px;
+  height: 180px;
+  background-color: rgb(138, 51, 219);
+  border-radius: 100px;
+  transition: background-color 0.4s ease;
+  animation: blink 2s infinite alternate;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 12px 40px rgba(14, 13, 13, 0.2);
+  /* More prominent box shadow */
 }
+
+
 
 
 .btn-info{
