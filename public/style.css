@@ -13,10 +13,50 @@ body {
     top: 200px;
 }
 
+.gradient-box {
+    background: linear-gradient(to bottom,rgba(255, 255, 255, 0),rgba(255, 255, 255, 1));
+    width: 100%;
+    height: 8rem
+}
+
+.gradient-text {
+    text-align: center;
+    color: #7b2ec3;
+}
+
+#output {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.journeyDetails {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)); /* Gradient background */
+    width: 100%;
+    color: darkmagenta;
+    padding: 10px; /* Add padding to give some space around the content */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+
 .satartbutton {
     border-radius: 50px;
     margin-top: 30px !important;
 
+}
+
+.touchTxt {
+    color: darkmagenta;output.innerHTML = "<div class='journeyDetails'>" + ".<br /><span style='background-color: darkmagenta; color: white; border-radius: 20px; padding: 5px 10px;'>" + result.routes[0].legs[0].distance.text + "</span>.<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
+
+    position: relative;
 }
 
 .button-p {
@@ -36,6 +76,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(14, 13, 13, 0.1);
     /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); */
 }
+
 .homeQoute-container {
     position: relative;
 }
@@ -53,17 +94,22 @@ body {
     transition: all 0.9s ease-in-out;
 }
 
+#start-btn {
+    background-color: #954adb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+}
+
+#stop-btn {
+    background-color: #954adb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+}
+
 .homeQoute.show {
     bottom: -70px;
     /* End position */
     opacity: 1;
 }
 
-
-
-.btn-info{
-  position: relative;
-}
 
 /* @keyframes blink {
     from {
@@ -171,58 +217,50 @@ body {
 }
 
 
-  #map-container {
+#map-container {
     height: 400px;
+    position: relative;
 }
 
-  
-  .fa-map-marker-alt,
-  .fa-dot-circle {
+
+.fa-map-marker-alt,
+.fa-dot-circle {
     color: #5bc0de;
-  }
-  
-  /*Jumbotron*/
-  .jumbotron {
+}
+
+/*Jumbotron*/
+.jumbotron {
     background-color: transparent;
     margin: 0;
     padding: 10px;
-  }
-  
-  .jumbotron h1 {
+}
+
+.jumbotron h1 {
     letter-spacing: 2.5px;
     font-size: 3.5em;
-  }
-  
-  .jumbotron h1,
-  .jumbotron p {
-    text-align: center;
-  }
-  
-  /*map*/
-  #googleMap {
-    width: 100%;
-    height: 400px;
-    margin: 10px auto;
-  }
-  
-  /*output box*/
-  #output {
-    text-align: center;
-    font-size: 2em;
-    margin: 20px auto;
-  }
-  
-  #mode {
-    color: black;
-  }
+}
 
+.jumbotron h1,
+.jumbotron p {
+    text-align: center;
+}
+
+/*map*/
+#googleMap {
+    width: 100%;
+    height: 88vh;
+    margin: 10px auto;
+}
+
+#mode {
+    color: black;
+}
 
 
 .form-container button[type="submit"]:hover {
     background-color: white;
     color: rgb(138, 51, 219);
 }
-
 
 
 @media screen and (min-width: 800px) {
