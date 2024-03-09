@@ -85,12 +85,13 @@
       </form>
 
       <div class="col-xs-offset-2 col-xs-10">
-        <button id="start-btn" class="btn btn-info btn-lg " onclick="calcRoute();">start<i class="fas fa-map-signs"></i></button>
-        <!-- <button onclick="startLiveTracking()">start</button> -->
-        <button onclick="stopLiveTracking()">stop</button>
         
-        
+          <button class="btn btn-info btn-lg" id="start-btn" onclick="calcRoute();">start<i class="fas fa-map-signs"></i></button>
+          <button class="btn" style="display: none;" id="stop-btn" onclick="stopLiveTracking()">stop<i class="fas fa-map-signs"></i></button>
       </div>
+        
+        
+     
     </div>
     <div class="container-fluid">
       <div id="googleMap">
