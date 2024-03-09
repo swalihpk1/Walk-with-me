@@ -1,28 +1,23 @@
 const express = require("express");
 const userRoute = express();
 
-userRoute.set('view engine', 'ejs')
+userRoute.set('view engine','ejs')
 userRoute.set('views', './views/user')
 
 const userRoutes = express();
 
 
 const authController = require('../controller/authController');
-const userMessageController = require('../controller/userMessageController')
-const authMiddleware = require('../middlewares/authMiddlewares');
 const alertController = require("../controller/alertsController");
 const mapController = require('../controller/mapController');
 
 
-userRoutes.get('/login', authMiddleware.isLogout, authController.loadLogIn);
-userRoutes.post('/login', authMiddleware.isLogout, authController.handleLogIn);
-userRoutes.get('/', authController.home);
-userRoutes.get('/signup', authMiddleware.isLogout, authController.loadSignup);
-userRoutes.post('/signup', authMiddleware.isLogout, authController.handleSignUp);
-userRoutes.get('/safetymap', authMiddleware.isLogin, mapController.safetyMap);
-userRoutes.patch('/verifyOtp', authController.verifyOtp)
+userRoutes.get('/login',authController.loadLogIn);
+userRoutes.post('/login',authController.handleLogIn);
+userRoutes.get('/',authController.home);
+userRoutes.get('/signup',authController.loadSignup);
+userRoutes.post('/signup',authController.handleSingUp);
+userRoute.get('/safetymap', mapController.safetyMap);
 userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
-
-userRoutes.get('/check-point', userMessageController.reachCheckPoint)
 
 module.exports = userRoutes;

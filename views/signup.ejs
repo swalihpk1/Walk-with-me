@@ -1,38 +1,112 @@
 <%- include('./layouts/header.ejs') -%>
-<main>
-
-    
-<div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="form-container">
-          <h2 class="mb-4 text-center">User Registration</h2>
-          <form id="registrationForm">
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-              <label for="Mobile">Mobile</label>
-              <input type="number" class="form-control" id="Mobile" name="Mobile" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-            <div class="text-center mt-3">
-              <p>Already have an account? <a href="/login">Login here</a></p>
-            </div>
-          </form>
-         
+  <main>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-container">
+            <h2 class="mb-4 text-center">User Registration</h2>
+            <form id="registrationForm">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username">
+                <p id="username_msg" style="display: none; color: brown;"></p>
+              </div>
+              <div class="form-group">
+                <label for="Mobile">Mobile</label>
+                <input type="number" class="form-control" id="Mobile" name="Mobile">
+                <p id="mobile_msg" style="display: none; color: brown;"></p>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+                <p id="password_msg" style="display: none; color: brown;"></p>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                <p id="confirmpas_msg" style="display: none; color: brown;"></p>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Register</button>
+              <div class="text-center mt-3">
+                <p>Already have an account? <a href="/login">Login here</a></p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</main>
-<%- include('./layouts/footer.ejs') -%>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let form = document.getElementById('registrationForm');
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        let mobileMsg = document.getElementById('mobile_msg');
+        let passwordMsg = document.getElementById('password_msg');
+        let usernameMsg = document.getElementById('username_msg');
+        let confirmPasswordMsg = document.getElementById('confirmpas_msg')
+        let mobile = document.getElementById('Mobile').value;
+        let password = document.getElementById('password').value;
+        let confirmPassword = document.getElementById('confirmPassword').value;
+        let username = document.getElementById('username').value;
+
+        mobileMsg.style.display = 'none';
+        passwordMsg.style.display = 'none';
+        usernameMsg.style.display = 'none';
+        confirmPasswordMsg.style.display = 'none';
+        let validate = true;
+
+        if (username.trim() === '') {
+          usernameMsg.textContent = 'Username is required.';
+          usernameMsg.style.display = 'block';
+          validate = false;
+        }
+
+        if (mobile.trim() === '') {
+          mobileMsg.textContent = 'Mobile is required.';
+          mobileMsg.style.display = 'block';
+          validate = false;
+        }
+
+        if (password.trim() === '') {
+          passwordMsg.textContent = 'Password is required.';
+          passwordMsg.style.display = 'block';
+          validate = false;
+        }
+        if (password !== confirmPassword || confirmPassword.trim() == '') {
+          confirmPasswordMsg.textContent = 'Password is not match';
+          confirmPasswordMsg.style.display = 'block';
+          validate = false;
+        }
+
+        if (validate) {
+          try {
+            let response = await fetch('/signup', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                name: username,
+                mobile: mobile,
+                password: password
+              })
+            });
+
+            if (response.ok) {
+              // Handle successful registration
+            } else {
+              // Handle registration failure
+            }
+          } catch (error) {
+            console.error('Error:', error);
+          }
+        }
+      });
+    });
+  </script>
+
+  <%- include('./layouts/footer.ejs') -%>
