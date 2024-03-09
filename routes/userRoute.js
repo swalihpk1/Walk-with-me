@@ -1,9 +1,10 @@
 const express = require("express");
-const userRoute = express();
+
+
 const userRoutes = express();
 
-userRoute.set('view engine', 'ejs')
-userRoute.set('views', './views/user')
+userRoutes.set('view engine', 'ejs')
+userRoutes.set('views', './views/user')
 
 const authController = require('../controller/authController');
 const userMessageController = require('../controller/userMessageController')
