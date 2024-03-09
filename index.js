@@ -21,11 +21,17 @@ const app = express();
 const nocache = require("nocache");
 const cors = require("cors");
 const morgan = require('morgan');
+const session = require('express-session')
 
 //Morgan
 const customFormat = ':method :url :status :res[content-length] - :response-time ms';
 app.use(morgan(customFormat));
 
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: false,
+  }));
 
 app.use(nocache());
 app.use(cors())
