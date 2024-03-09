@@ -94,7 +94,7 @@ const handleSignUp = async (req, res) => {
 };
 const loadOtpPage = async (req, res) => {
     try {
-        res.json({ load: "otp page Loaded" })
+       res.render('otp');
     } catch (error) {
         console.error("Error on loadOtpPage", error);
         res.status(500).json({ error: error.message });ver

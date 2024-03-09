@@ -60,9 +60,12 @@ body {
 }
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 05628053172d5d1336ab4e98b4097880bd608713
 .btn-info{
   position: relative;
 }
@@ -94,8 +97,6 @@ body {
 
     width: 20%;
 }
-
-
 
 .main-content {
     width: 50%;
@@ -203,7 +204,7 @@ body {
   /*map*/
   #googleMap {
     width: 100%;
-    height: 400px;
+    height: 800px;
     margin: 10px auto;
   }
   
