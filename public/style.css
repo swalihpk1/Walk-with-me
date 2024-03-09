@@ -133,6 +133,10 @@ body {
 }
 
 
+.btn-info {
+    position: relative;
+}
+
 /* @keyframes blink {
     from {
         opacity: 1;
@@ -160,8 +164,6 @@ body {
 
     width: 20%;
 }
-
-
 
 .main-content {
     width: 50%;
@@ -261,6 +263,23 @@ body {
     letter-spacing: 2.5px;
     font-size: 3.5em;
 }
+
+.jumbotron h1,
+.jumbotron p {
+    text-align: center;
+}
+
+/*output box*/
+#output {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px auto;
+}
+
+#mode {
+    color: black;
+}
+
 
 .jumbotron h1,
 .jumbotron p {
