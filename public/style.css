@@ -36,7 +36,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(14, 13, 13, 0.1);
     /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); */
 }
-
 .homeQoute-container {
     position: relative;
 }
@@ -60,6 +59,12 @@ body {
     opacity: 1;
 }
 
+
+
+.btn-info{
+  position: relative;
+}
+
 /* @keyframes blink {
     from {
         opacity: 1;
@@ -71,7 +76,7 @@ body {
 } */
 
 
-.satartbutton {
+.startbutton {
     margin-top: 30px;
     justify-content: center;
 }
@@ -165,10 +170,59 @@ body {
     justify-content: center;
 }
 
+
+  #map-container {
+    height: 400px;
+}
+
+  
+  .fa-map-marker-alt,
+  .fa-dot-circle {
+    color: #5bc0de;
+  }
+  
+  /*Jumbotron*/
+  .jumbotron {
+    background-color: transparent;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  .jumbotron h1 {
+    letter-spacing: 2.5px;
+    font-size: 3.5em;
+  }
+  
+  .jumbotron h1,
+  .jumbotron p {
+    text-align: center;
+  }
+  
+  /*map*/
+  #googleMap {
+    width: 100%;
+    height: 400px;
+    margin: 10px auto;
+  }
+  
+  /*output box*/
+  #output {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px auto;
+  }
+  
+  #mode {
+    color: black;
+  }
+
+
+
 .form-container button[type="submit"]:hover {
     background-color: white;
     color: rgb(138, 51, 219);
 }
+
 
 
 @media screen and (min-width: 800px) {
