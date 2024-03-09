@@ -1,3 +1,4 @@
+
 //javascript.js
 //set map options
   // Check if Geolocation is supported

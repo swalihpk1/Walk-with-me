@@ -15,12 +15,13 @@ body {
 
 .satartbutton {
     border-radius: 50px;
-    margin-top: 120px !important;
+    margin-top: 30px !important;
 
 }
 
 .button-p {
     color: white;
+    font-size: 22px;
 
 }
 
@@ -28,21 +29,38 @@ body {
     border: none;
     width: 180px;
     height: 180px;
-    background-color: rgb(138, 51, 219);
+    background-color: rgb(77 9 141/ 80%);
     border-radius: 100px;
-    transition: background-color 0.4s ease;
-    animation: blink 2s infinite alternate;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(14, 13, 13, 0.1);
-    /* Add a more prominent box shadow */
+    /* transition: background-color 0.4s ease; */
+    /* animation: blink 2s infinite alternate; */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(14, 13, 13, 0.1);
+    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); */
 }
+
+.homeQoute-container {
+    position: relative;
+}
+
+.homeQoute {
+    font-family: "Josefin Slab", serif;
+    font-style: italic;
+    color: #7b2ec3;
+    position: absolute;
+    bottom: -100px;
+    width: 22rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: all 0.9s ease-in-out;
+}
+
 
 
 .btn-info{
   position: relative;
 }
 
-
-@keyframes blink {
+/* @keyframes blink {
     from {
         opacity: 1;
     }
@@ -50,7 +68,7 @@ body {
     to {
         opacity: 0.5;
     }
-}
+} */
 
 
 .startbutton {
@@ -60,6 +78,8 @@ body {
 
 .button-text {
     color: white;
+    font-size: 77px;
+    font-style: italic;
 
 }
 
@@ -107,54 +127,48 @@ body {
     }
 }
 
-@media screen and (min-width: 642px) and (max-width:800px) {
-    .main-content {
-        width: 70%;
-    }
-}
 
 .form-container {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 30px;
-  }
-  .form-container h2 {
+}
+
+.form-container h2 {
     color: #333;
-  }
-  .form-container label {
+}
+
+.form-container label {
     color: #555;
-  }
-  .form-container input[type="text"],
-  .form-container input[type="Mobile"],
-  .form-container input[type="password"] {
+}
+
+.form-container input[type="text"],
+.form-container input[type="Mobile"],
+.form-container input[type="password"] {
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
-  }
-  .form-container input[type="text"]:focus,
-  .form-container input[type="Mobile"]:focus,
-  .form-container input[type="password"]:focus {
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="Mobile"]:focus,
+.form-container input[type="password"]:focus {
     background-color: #ffffff;
     border: 1px solid #80bdff;
-  }
-  .form-container button[type="submit"] {
+}
+
+.form-container button[type="submit"] {
     background-color: rgb(138, 51, 219);
     color: white;
     border: none;
     margin-top: 15px;
     justify-content: center;
-  }
-  .form-container button[type="submit"]:hover {
-    background-color:white ;
-    color:   rgb(138, 51, 219);
-  }
+}
+
 
   #map-container {
     height: 400px;
 }
-
-
-
 
   
   .fa-map-marker-alt,
@@ -199,31 +213,167 @@ body {
 
 
 
+.form-container button[type="submit"]:hover {
+    background-color: white;
+    color: rgb(138, 51, 219);
+}
 
-@media screen and (max-width: 768px) {
+
+
+@media screen and (min-width: 800px) {
     .button-1 {
-        width: 190px;
-        height: 190px;
-        padding: 15px;
-        border-radius: 50%;
+        width: 420px;
+        height: 420px;
+        padding: 25px;
+        border-radius: 70%;
     }
 
     .button-p {
-        font-size: 13px;
+        font-size: 35px;
 
+    }
+
+    .button-text {
+        color: white;
+        font-size: 120px;
+        font-style: italic;
+    }
+
+    .homeQoute {
+        font-size: 35px;
     }
 }
 
-@media screen and (max-width: 270px) {
+
+@media screen and (min-width: 642px) and (max-width:800px) {
+    .main-content {
+        width: 70%;
+    }
+
     .button-1 {
-        width: 140px;
-        height: 140px;
+        width: 390px;
+        ;
+        height: 390px;
+        padding: 25px;
+        border-radius: 70%;
+    }
+
+    .button-p {
+        font-size: 29px;
+
+    }
+
+    .button-text {
+        color: white;
+        font-size: 105px;
+        font-style: italic;
+    }
+
+    .homeQoute {
+        font-size: 30px;
+    }
+}
+
+
+
+@media screen and (min-width: 450px) and (max-width:642px) {
+    .main-content {
+        width: 70%;
+    }
+
+    .button-1 {
+        width: 350px;
+        height: 350px;
+        padding: 25px;
+        border-radius: 70%;
+    }
+
+    .button-p {
+        font-size: 25px;
+
+    }
+
+    .button-text {
+        color: white;
+        font-size: 95px;
+        font-style: italic;
+    }
+
+    .homeQoute {
+        font-size: 25px;
+    }
+}
+
+
+@media screen and (min-width: 350px) and (max-width:450px) {
+    .button-1 {
+        width: 270px;
+        height: 270px;
         padding: 18px;
         border-radius: 50%;
     }
 
     .button-p {
-        font-size: 9px;
+        font-size: 22px;
+    }
 
+    .button-text {
+        color: white;
+        font-size: 85px;
+        font-style: italic;
+    }
+
+    .homeQoute {
+        font-size: 25px;
+    }
+}
+
+
+@media screen and (min-width: 250px) and (max-width:350px) {
+    .button-1 {
+        width: 190px;
+        height: 190px;
+        padding: 18px;
+        border-radius: 50%;
+    }
+
+    .button-p {
+        font-size: 10px;
+
+    }
+
+    .button-text {
+        color: white;
+        font-size: 57px;
+        font-style: italic;
+    }
+
+    .homeQoute {
+        font-size: 20px;
+    }
+
+
+    @media screen and (min-width: 100px) {
+        .button-1 {
+            width: 173px;
+            height: 173px;
+            padding: 18px;
+            border-radius: 50%;
+        }
+
+        .button-p {
+            font-size: 9px;
+
+        }
+
+        .homeQoute {
+            font-size: 15px;
+        }
+
+        .button-text {
+            color: white;
+            font-size: 48px;
+            font-style: italic;
+        }
     }
 }
