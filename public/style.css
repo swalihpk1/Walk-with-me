@@ -36,7 +36,6 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(14, 13, 13, 0.1);
     /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); */
 }
-
 .homeQoute-container {
     position: relative;
 }
@@ -52,6 +51,12 @@ body {
     transform: translateX(-50%);
     opacity: 0;
     transition: all 0.9s ease-in-out;
+}
+
+.homeQoute.show {
+    bottom: -70px;
+    /* End position */
+    opacity: 1;
 }
 
 
