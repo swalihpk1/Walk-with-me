@@ -1,6 +1,10 @@
 var mapOptions = {};
 var map;
+var currMarker;
 var marker;
+
+
+
 
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(success, error);
@@ -25,14 +29,18 @@ function success(position) {
   // Create the map
   map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
-
+  var currentIcon = {
+    url: '/img/current-indicator.png', // Path to your custom icon image
+    scaledSize: new google.maps.Size(40, 40), // Size of the icon
+  }
+ 
 
   // Create a marker for the current location
-  new google.maps.Marker({
+   currMarker = new google.maps.Marker({
     position: { lat: latitude, lng: longitude },
     map: map,
     title: 'Your Location',
-  
+    icon: currentIcon
   });
 
   
@@ -73,6 +81,9 @@ function error() {
   console.log("Unable to retrieve your location");
 }
 
+
+
+
 // Load the map when the window is fully loaded
 google.maps.event.addDomListener(window, 'load');
 
@@ -92,6 +103,12 @@ function calcRoute() {
       directionsDisplay.setMap(map);
   }
   //create request
+  directionsDisplay.setOptions({
+    polylineOptions: {
+        strokeColor: 'rgb(128, 69, 185)',
+        strokeWeight: 10 // Change this to the desired thickness // Change this to the desired color
+    }
+});
 
 
   navigator.geolocation.getCurrentPosition((position) => {
@@ -115,6 +132,7 @@ function calcRoute() {
         directionsDisplay.setDirections({ routes: [] });
         //display route
         directionsDisplay.setDirections(result);
+        startLiveTracking(); // Start live tracking after route calculation
       } else {
         //delete route from map
         directionsDisplay.setDirections({ routes: [] });
@@ -144,3 +162,69 @@ var autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 function error(err) {
   console.error(`Error obtaining your location: ${err.message}`);
 }
+
+var watchId; // Variable to store the watch position ID
+
+// Function to start live tracking
+function startLiveTracking() {
+  if (navigator.geolocation) {
+    watchId = navigator.geolocation.watchPosition(trackUser, error);
+    map.setZoom(47); // Adjust the zoom level as desired
+  } else {
+    console.log("Geolocation is not supported by your browser.");
+  }
+}
+
+// Function to track user's position
+function trackUser(position) {
+    console.log('position:',position);
+  const latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  // Update user marker position
+  if (currMarker) {
+    currMarker.setPosition({ lat: latitude, lng: longitude });
+  } else {
+    // Create user marker if not already created
+    marker = new google.maps.Marker({
+      position: { lat: latitude, lng: longitude },
+      map: map,
+      title: 'Your Location',
+      icon: currentIcon
+    });
+  }
+
+  // Check if user has reached the destination
+  const destination = document.getElementById("to").value;
+  const distanceToDestination = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latitude, longitude), destination);
+  if (distanceToDestination < ARRIVAL_THRESHOLD) {
+    // User has reached the destination, stop tracking
+    stopLiveTracking();
+    alert('reached');
+    console.log("You have reached your destination!");
+  }
+}
+
+// Function to stop live tracking
+function stopLiveTracking() {
+  if (watchId) {
+    navigator.geolocation.clearWatch(watchId);
+    watchId = undefined;
+  }
+
+      // Clear the directions displayed on the map
+      directionsDisplay.setDirections({ routes: [] });
+
+      // Remove the destination marker from the map
+  if (marker) {
+    marker.setMap(null);
+    marker = undefined; // Reset marker variable
+  }
+}
+
+// Constants
+const ARRIVAL_THRESHOLD = 50; // Threshold distance (in meters) within which user is considered to have arrived
+
+// Example usage:
+
+
