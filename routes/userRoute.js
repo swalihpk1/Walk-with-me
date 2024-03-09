@@ -17,7 +17,7 @@ userRoutes.post('/login',authController.handleLogIn);
 userRoutes.get('/',authController.home);
 userRoutes.get('/signup',authController.loadSignup);
 userRoutes.post('/signup',authController.handleSingUp);
-userRoute.get('/safetymap', mapController.safetyMap);
+userRoutes.get('/safetymap', mapController.safetyMap);
 userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
 
 module.exports = userRoutes;

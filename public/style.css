@@ -36,6 +36,12 @@ body {
     /* Add a more prominent box shadow */
 }
 
+
+.btn-info{
+  position: relative;
+}
+
+
 @keyframes blink {
     from {
         opacity: 1;
@@ -47,7 +53,7 @@ body {
 }
 
 
-.satartbutton {
+.startbutton {
     margin-top: 30px;
     justify-content: center;
 }
@@ -142,6 +148,55 @@ body {
     background-color:white ;
     color:   rgb(138, 51, 219);
   }
+
+  #map-container {
+    height: 400px;
+}
+
+
+
+
+  
+  .fa-map-marker-alt,
+  .fa-dot-circle {
+    color: #5bc0de;
+  }
+  
+  /*Jumbotron*/
+  .jumbotron {
+    background-color: transparent;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  .jumbotron h1 {
+    letter-spacing: 2.5px;
+    font-size: 3.5em;
+  }
+  
+  .jumbotron h1,
+  .jumbotron p {
+    text-align: center;
+  }
+  
+  /*map*/
+  #googleMap {
+    width: 100%;
+    height: 400px;
+    margin: 10px auto;
+  }
+  
+  /*output box*/
+  #output {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px auto;
+  }
+  
+  #mode {
+    color: black;
+  }
+
 
 
 
