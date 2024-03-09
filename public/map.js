@@ -91,6 +91,8 @@ var directionsDisplay = new google.maps.DirectionsRenderer();
 
 function calcRoute() {
   //create map
+  document.getElementById('start-btn').style.display = 'none'
+  document.getElementById('stop-btn').style.display = 'block'
   console.log(mapOptions)
   //create a DirectionsService object to use the route method and get a result for our request
   var directionsService = new google.maps.DirectionsService();
@@ -128,7 +130,7 @@ function calcRoute() {
       
         //Get distance and time
         const output = document.querySelector('#output');
-        output.innerHTML = "<div class='alert-info'>" + ".<br />To: " + document.getElementById("to").value + ".<br /> Walking distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
+        output.innerHTML = "<div class='alert-info'>" + ".<br /> Walking distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
         directionsDisplay.setDirections({ routes: [] });
         //display route
         directionsDisplay.setDirections(result);
@@ -202,6 +204,30 @@ function trackUser(position) {
     stopLiveTracking();
     alert('reached');
     console.log("You have reached your destination!");
+  }else{
+          // Recalculate route and update output
+          var request = {
+            origin: { lat: latitude, lng: longitude },
+            destination: destination,
+            travelMode: google.maps.TravelMode.WALKING,
+            unitSystem: google.maps.UnitSystem.METRIC
+        };
+
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function (result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                // Update distance and duration in the output
+                const output = document.querySelector('#output');
+                output.innerHTML = "<div class='alert-info'>" + "<br /> Walking distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
+                directionsDisplay.setDirections({ routes: [] });
+                // Display updated route
+                directionsDisplay.setDirections(result);
+            } else {
+                // Show error message
+                const output = document.querySelector('#output');
+                output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve walking distance.</div>";
+            }
+        });
   }
 }
 
@@ -211,6 +237,8 @@ function stopLiveTracking() {
     navigator.geolocation.clearWatch(watchId);
     watchId = undefined;
   }
+  document.getElementById('start-btn').style.display = 'block'
+  document.getElementById('stop-btn').style.display = 'none'
 
       // Clear the directions displayed on the map
       directionsDisplay.setDirections({ routes: [] });

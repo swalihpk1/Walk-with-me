@@ -53,7 +53,8 @@
             <input type="hidden" id="to" placeholder="Destination" class="form-control">
 
             <div class="col-xs-offset-2 col-xs-10">
-                <button class="btn btn-info btn-lg " onclick="calcRoute();"><i class="fas fa-map-signs"></i></button>
+                <button class="btn btn-info btn-lg" id="start-btn" onclick="calcRoute();">start<i class="fas fa-map-signs"></i></button>
+                <button class="btn" style="display: none;" id="stop-btn" onclick="stopLiveTracking()">stop<i class="fas fa-map-signs"></i></button>
             </div>
 
     </main>
