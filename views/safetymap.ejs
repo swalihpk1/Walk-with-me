@@ -1,67 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./layouts/header.ejs') -%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <body class="p-0">
+<main>
+    <div id="map-container" class="position-relative">
+        <div id="googleMap"></div>
+    </div>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/style.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <!--  Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
-</head>
-
-<body class="p-0">
-    <nav class="navbar navbar-expand-lg navbar-light mt-3">
-            <a class="navbar-brand p-0 w-50" href="#">
-                <div class="">
-                    <div class="">
-                        <img src="/img/Picsart_24-03-07_23-16-24-066.png" alt="" class="w-100 h-100">
-                    </div>
-                </div>
-            </a>
-            <button class="navbar-toggler nav-button " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <!-- <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="#">Features</a>
-                    <a class="nav-item nav-link" href="#">Pricing</a>
-                    <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                </div> -->
+    <div id="output" class="position-absolute bottom-0 start-50 translate-middle-x">
+        <div id="gradient-box" class="gradient-box">
+            <p class="text-center touchTxt">Touch your destination</p>
+            <div class="d-flex justify-content-center mt-3">
+                <button class="btn rounded-pill text-white border-0 mr-2" id="start-btn"
+                    onclick="calcRoute();">Start</button>
+                <button class="btn rounded-pill text-white border-0" style="display: none;" id="stop-btn"
+                    onclick="stopLiveTracking()">Stop</button>
             </div>
-    </nav>
-    <main>
-     
-            <div id="map-container">
-                <div id="googleMap">
+        </div>
+        <input type="hidden" id="from" placeholder="Origin" class="form-control">
+        <input type="hidden" id="to" placeholder="Destination" class="form-control">
+    </div>
 
-                </div>
-                <div id="output">
-
-                </div>
+    <div id="dropdown-container" class="dropdown-container d-none fixed-top m-3">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="card rounded border-0 p-4">
+                <p class="card-title">How much time wiil take to reach your destination? </p>
+                <input type="number" id="dropdown-number" class="form-control mb-3" placeholder="in minutes">
+                <button class="btn btn-primary text-white" style="background-color: rgb(127 81 187);" onclick="submitNumber()">Submit</button>
             </div>
-            <input type="hidden" id="from" placeholder="Origin" class="form-control">
-            <input type="hidden" id="to" placeholder="Destination" class="form-control">
+        </div>
+    </div>
 
-            <div class="col-xs-offset-2 col-xs-10">
-                <button class="btn btn-info btn-lg" id="start-btn" onclick="calcRoute();">start<i class="fas fa-map-signs"></i></button>
-                <button class="btn" style="display: none;" id="stop-btn" onclick="stopLiveTracking()">stop<i class="fas fa-map-signs"></i></button>
-            </div>
+    <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
+</main>
 
-    </main>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UNyyeu7K7g6VmxMlOJFBx1vGT0Igbmo&libraries=places"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="/script.js"></script>
-    <%- include('./layouts/footer.ejs') -%>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UNyyeu7K7g6VmxMlOJFBx1vGT0Igbmo&libraries=places"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/script.js"></script>
+        <%- include('./layouts/footer.ejs') -%>

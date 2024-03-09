@@ -13,16 +13,78 @@ body {
     top: 200px;
 }
 
+.gradient-box {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    width: 100%;
+    height: 8rem
+}
+
+.gradient-text {
+    text-align: center;
+    color: #7b2ec3;
+}
+
+#output {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.journeyDetails {
+    background: white;
+    width: 100%;
+    color: darkmagenta;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 1px -15px 20px 11px rgba(0, 0, 0, 0.1);
+}
+
+
 .satartbutton {
     border-radius: 50px;
     margin-top: 30px !important;
 
 }
 
+.touchTxt {
+    color: darkmagenta;
+    position: relative;
+}
+
+
+
 .button-p {
     color: white;
     font-size: 22px;
 
+}
+
+.dropdown-container {
+    z-index: 999;
+    /* Ensure dropdown is on top of other components */
+    background-color: #fff;
+    /* Set background color for the dropdown */
+    border-radius: 5px;
+    /* Add rounded corners */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    /* Add subtle shadow */
+}
+
+.dimmer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent black overlay */
 }
 
 .button-1 {
@@ -36,6 +98,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(14, 13, 13, 0.1);
     /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 1); */
 }
+
 .homeQoute-container {
     position: relative;
 }
@@ -53,6 +116,16 @@ body {
     transition: all 0.9s ease-in-out;
 }
 
+#start-btn {
+    background-color: #954adb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+}
+
+#stop-btn {
+    background-color: #954adb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+}
+
 .homeQoute.show {
     bottom: -70px;
     /* End position */
@@ -60,8 +133,8 @@ body {
 }
 
 
-.btn-info{
-  position: relative;
+.btn-info {
+    position: relative;
 }
 
 /* @keyframes blink {
@@ -168,58 +241,68 @@ body {
 }
 
 
-  #map-container {
+#map-container {
     height: 400px;
+    position: relative;
 }
 
-  
-  .fa-map-marker-alt,
-  .fa-dot-circle {
+
+.fa-map-marker-alt,
+.fa-dot-circle {
     color: #5bc0de;
-  }
-  
-  /*Jumbotron*/
-  .jumbotron {
+}
+
+/*Jumbotron*/
+.jumbotron {
     background-color: transparent;
     margin: 0;
     padding: 10px;
-  }
-  
-  .jumbotron h1 {
+}
+
+.jumbotron h1 {
     letter-spacing: 2.5px;
     font-size: 3.5em;
-  }
-  
-  .jumbotron h1,
-  .jumbotron p {
+}
+
+.jumbotron h1,
+.jumbotron p {
     text-align: center;
-  }
-  
-  /*map*/
-  #googleMap {
-    width: 100%;
-    height: 800px;
-    margin: 10px auto;
-  }
-  
-  /*output box*/
-  #output {
+}
+
+/*output box*/
+#output {
     text-align: center;
     font-size: 2em;
     margin: 20px auto;
-  }
-  
-  #mode {
-    color: black;
-  }
+}
 
+#mode {
+    color: black;
+}
+
+
+.jumbotron h1,
+.jumbotron p {
+    text-align: center;
+}
+
+/*map*/
+#googleMap {
+    width: 100%;
+    height: 88vh;
+    margin: 10px auto;
+}
+
+#mode {
+    color: black;
+}
 
 
 .form-container button[type="submit"]:hover {
     background-color: white;
     color: rgb(138, 51, 219);
+    font-size: x-large;
 }
-
 
 
 @media screen and (min-width: 800px) {
@@ -243,6 +326,11 @@ body {
 
     .homeQoute {
         font-size: 35px;
+    }
+
+    .form-container {
+        font-size: large;
+        padding: 14px;
     }
 }
 
@@ -274,6 +362,11 @@ body {
     .homeQoute {
         font-size: 30px;
     }
+
+    .form-container {
+        font-size: larger;
+        padding: 14px;
+    }
 }
 
 
@@ -304,6 +397,11 @@ body {
     .homeQoute {
         font-size: 25px;
     }
+
+    .form-container {
+        font-size: medium;
+        padding: 14px;
+    }
 }
 
 
@@ -327,6 +425,15 @@ body {
 
     .homeQoute {
         font-size: 25px;
+    }
+
+    .form-container {
+        font-size: small;
+        padding: 14px;
+    }
+
+    .form-control {
+        font-size: 14px !important;
     }
 }
 
@@ -354,6 +461,19 @@ body {
         font-size: 20px;
     }
 
+    .registerBtn {
+        font-size: x-large;
+    }
+
+    .form-container {
+        font-size: smaller;
+        padding: 14px;
+    }
+
+    .form-control {
+        font-size: 12px !important;
+    }
+
 
     @media screen and (min-width: 100px) {
         .button-1 {
@@ -377,5 +497,18 @@ body {
             font-size: 48px;
             font-style: italic;
         }
+
+        .form-container {
+            font-size: x-small;
+            padding: 14px;
+        }
+
+        .form-control {
+            font-size: 10px !important;
+        }
+
+        /* .form-container button[type="submit"]:hover {
+            font-size: x-large;
+        } */
     }
 }

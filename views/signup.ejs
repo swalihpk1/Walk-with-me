@@ -1,38 +1,65 @@
 <%- include('./layouts/header.ejs') -%>
-<main>
-
-    
-<div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="form-container">
-          <h2 class="mb-4 text-center">User Registration</h2>
-          <form id="registrationForm">
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-              <label for="Mobile">Mobile</label>
-              <input type="number" class="form-control" id="Mobile" name="Mobile" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-              <label for="confirmPassword">Confirm Password</label>
-              <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-            <div class="text-center mt-3">
-              <p>Already have an account? <a href="/login">Login here</a></p>
-            </div>
-          </form>
-         
+  <main>
+    <div class="container shadow-lg mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-container">
+            <h2 class="mb-4 text-center">User Registration</h2>
+            <form id="registrationForm">
+              <div class="form-group mb-3">
+                <label for="username">Username *</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="Mobile">Mobile *</label>
+                <input type="number" class="form-control" id="Mobile" name="Mobile" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="password">Password *</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+              </div>
+              <div class="form-group mb-3">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+              </div>
+              <label for="">Trustuble person's numbers *</label>
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group mb-3">
+                    <label for="mobile1">Mobile 1</label>
+                    <input type="number" class="form-control" id="mobile1" name="mobile1" required>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group mb-3">
+                    <label for="mobile2">Mobile 2</label>
+                    <input type="number" class="form-control" id="mobile2" name="mobile2" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="gender">Gender *</label><br>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                  <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                  <label class="form-check-label" for="female">Female</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="gender" id="other" value="other" required>
+                  <label class="form-check-label" for="other">Other</label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Register</button>
+              <div class="text-center mt-3">
+                <p class="">Already have an account? <a href="/login">Login here</a></p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</main>
-<%- include('./layouts/footer.ejs') -%>
+  </main>
+  <%- include('./layouts/footer.ejs') -%>
