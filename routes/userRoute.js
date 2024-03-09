@@ -19,7 +19,7 @@ userRoutes.post('/login', authMiddleware.isLogout, authController.handleLogIn);
 userRoutes.get('/', authController.home);
 userRoutes.get('/signup', authMiddleware.isLogout, authController.loadSignup);
 userRoutes.post('/signup', authMiddleware.isLogout, authController.handleSignUp);
-userRoute.get('/safetymap', authMiddleware.isLogin, mapController.safetyMap);
+userRoutes.get('/safetymap', authMiddleware.isLogin, mapController.safetyMap);
 userRoutes.patch('/verifyOtp', authController.verifyOtp)
 userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
 
