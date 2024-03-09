@@ -1,9 +1,10 @@
 const isLogin = (req, res,next) => {
     try {
         if (req.session.user_id) {
-            return next();
+            next();
+        } else {
+            return res.redirect('/')
         }
-        return res.redirect('/')
     } catch (error) {
         console.log("error on isLogin middleware",error)
     }
