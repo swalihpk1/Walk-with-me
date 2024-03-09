@@ -22,7 +22,4 @@ userRoutes.patch('/verifyOtp',authController.verifyOtp);
 userRoutes.get('/otp',authController.loadOtpPage);
 userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
 userRoutes.get('/check-point',userMessageController.reachCheckPoint);
-
-
-
 module.exports = userRoutes;
