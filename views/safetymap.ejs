@@ -1,41 +1,83 @@
 <%- include('./layouts/header.ejs') -%>
 
+
     <body class="p-0">
-<main>
-    <div id="map-container" class="position-relative">
-        <div id="googleMap"></div>
-    </div>
+        <main>
 
-    <div id="output" class="position-absolute bottom-0 start-50 translate-middle-x">
-        <div id="gradient-box" class="gradient-box">
-            <p class="text-center touchTxt">Touch your destination</p>
-            <div class="d-flex justify-content-center mt-3">
-                <button class="btn rounded-pill text-white border-0 mr-2" id="start-btn"
-                    onclick="calcRoute();">Start</button>
-                <button class="btn rounded-pill text-white border-0" style="display: none;" id="stop-btn"
-                    onclick="stopLiveTracking()">Stop</button>
-            </div>
-        </div>
-        <input type="hidden" id="from" placeholder="Origin" class="form-control">
-        <input type="hidden" id="to" placeholder="Destination" class="form-control">
-    </div>
+            <main>
+                <div id="map-container" class="position-relative">
+                    <button class="btn stopBtn rounded-pill">Stop</button>
+                    <div id="googleMap">
 
-    <div id="dropdown-container" class="dropdown-container d-none fixed-top m-3">
-        <div class="d-flex justify-content-center align-items-center h-100">
-            <div class="card rounded border-0 p-4">
-                <p class="card-title">How much time wiil take to reach your destination? </p>
-                <input type="number" id="dropdown-number" class="form-control mb-3" placeholder="in minutes">
-                <button class="btn btn-primary text-white" style="background-color: rgb(127 81 187);" onclick="submitNumber()">Submit</button>
-            </div>
-        </div>
-    </div>
+                    </div>
+                </div>
 
-    <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
-</main>
+                <div id="output" class="position-absolute bottom-0 start-50 translate-middle-x">
+                    <div id="gradient-box" class="gradient-box">
+                        <p class="text-center touchTxt">Touch your destination</p>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button class="btn rounded-pill text-white border-0 mr-2" id="start-btn"
+                                onclick="calcRoute();">Start</button>
+                            <button class="btn rounded-pill text-white border-0" style="display: none;" id="stop-btn"
+                                onclick="stopLiveTracking()">Stop</button>
+                           
+                        </div>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UNyyeu7K7g6VmxMlOJFBx1vGT0Igbmo&libraries=places"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="/script.js"></script>
-        <%- include('./layouts/footer.ejs') -%>
+                    </div>
+                </div>
+                <input type="hidden" id="from" placeholder="Origin" class="form-control">
+                <input type="hidden" id="to" placeholder="Destination" class="form-control">
+                </div>
+
+                <div id="dropdown-container" class="dropdown-container d-none fixed-top m-3">
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <div class="card rounded border-0 p-4">
+                            <p class="card-title">How much time will it take to reach your destination?</p>
+                            <input type="number" id="dropdown-number" class="form-control mb-3"
+                                placeholder="in minutes">
+                            <button class="btn btn-primary text-white" style="background-color: rgb(127 81 187);"
+                                onclick="submitNumber()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tracking-content" class="tracking-content">
+                    <div id="progress-bar">
+                        <div id="progress"></div>
+                        <!-- Labels for start and end points -->
+                        <div class="label start-label">Start</div>
+                        <div class="label end-label">End</div>
+                    </div>
+                    <div id="checkpoint1" class="checkpoint"></div>
+                    <div id="checkpoint2" class="checkpoint"></div>
+                </div>
+
+                <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
+            </main>
+
+            <script>
+                var width = 0; // Define width outside of the function
+                var interval; // Declare interval globally for better control
+                var paused = false; // Variable to track if the progress is paused
+
+                // Function to pause or resume the progress
+                function pauseResumeProgress() {
+                    if (!paused) {
+                        clearInterval(interval); // Pause the timer
+                        document.getElementById('pause-resume-btn').innerText = 'Resume'; // Change button text to 'Resume'
+                    } else {
+                        interval = setInterval(timerFunction, 1000); // Resume the timer
+                        document.getElementById('pause-resume-btn').innerText = 'Pause'; // Change button text to 'Pause'
+                    }
+                    paused = !paused; // Toggle the paused state
+                }
+
+                document.getElementById('pause-resume-btn').addEventListener('click', pauseResumeProgress);
+            </script>
+
+            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UNyyeu7K7g6VmxMlOJFBx1vGT0Igbmo&libraries=places"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="/script.js"></script>
+            <%- include('./layouts/footer.ejs') -%>

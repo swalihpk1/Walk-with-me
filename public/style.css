@@ -304,6 +304,95 @@ body {
     font-size: x-large;
 }
 
+.tracking-content {
+    position: fixed;
+    bottom: -100%;
+    /* Adjust as needed */
+    left: 0;
+    width: 100%;
+    background-color: #eaeaea;
+    transition: bottom 0.5s ease;
+    border-radius: 14px;
+    height: 7rem;
+    display: flex;
+    justify-content: center;
+    /* Center content horizontally */
+    align-items: center;
+    box-shadow: 1px -15px 20px 11px rgba(0, 0, 0, 0.1);
+    /* Center content vertically */
+}
+
+#progress-bar {
+    width: 80%;
+    /* Adjust the width as needed */
+    height: 14px;
+    background-color: #ffff;
+    border-radius: 25px;
+    border: 0.5px grey;
+    overflow: hidden;
+    display: flex;
+    border-style: groove;
+}
+
+#progress {
+    width: 0%;
+    height: 100%;
+    background-color: #9f52ba;
+    border-radius: 25px;
+    transition: width 0.5s ease;
+}
+
+.checkpoint {
+    width: 30px;
+    /* Adjust checkpoint width */
+    height: 30px;
+    background-color: #ffffff;
+    border: 1px solid rgb(173, 173, 173);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 2;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#checkpoint1 {
+    left: 33%;
+}
+
+#checkpoint2 {
+    left: 66%;
+}
+
+.checkpoint:hover {
+    background-color: #ffbb33;
+    cursor: pointer;
+}
+
+.label {
+    position: absolute;
+    font-size: 12px;
+}
+
+.start-label {
+    top: 23%;
+    margin-left: 1rem;
+    transform: translateX(-50%);
+}
+
+.end-label {
+    right: 2rem;
+    top: 23%;
+    transform:
+        translateX(50%);
+}
+
+.stopBtn {
+    position: absolute;
+    top: 15%;
+    right: 1%;
+    z-index: 1;
+    background-color: rgb(191, 0, 0)!important;
+    color: #fff !important;
+}
 
 
 @media screen and (min-width: 800px) {
@@ -318,6 +407,7 @@ body {
         font-size: 35px;
 
     }
+
 
     .button-text {
         color: white;
@@ -340,19 +430,22 @@ body {
 
     .gradient-box {
         position: relative;
-        bottom: -2rem;
+        bottom: -3rem;
         height: 7rem;
     }
 
+
+
     .journeyDetails {
         position: relative;
-        bottom: -1rem;
+        bottom: -3rem;
         font-size: x-large;
     }
 
     .touchTxt {
         font-size: large;
     }
+
 }
 
 @media screen and (min-width: 642px) and (max-width:800px) {
@@ -619,9 +712,11 @@ body {
         font-size: medium;
     }
 
+
     /* .form-container button[type="submit"]:hover {
             font-size: x-large;
         } */
+
 }
 
 

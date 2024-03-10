@@ -44,7 +44,6 @@ function success(position) {
     });
 
 
-
     // Add click listener to set destination on map click
     google.maps.event.addListener(map, 'click', function (event) {
         addPinMarker(event)
@@ -158,10 +157,18 @@ function submitNumber() {
     // Handle the submitted number from the dropdown
     const number = $("#dropdown-number").val();
     console.log("Submitted number:", number);
+    startProgressBar(number)
 
     // Hide the dropdown and dimmer after submission
     $("#dropdown-container").addClass("d-none");
     $("#dimmer-overlay").addClass("d-none");
+
+    // Show the tracking content by sliding it from the bottom
+    $("#tracking-content").css("bottom", "0");
+    setTimeout(() => {
+        startProgressBar(number)
+    }, timeout);
+
 }
 
 
@@ -269,11 +276,75 @@ function stopLiveTracking() {
     }
 }
 
-
-
 // Constants
 const ARRIVAL_THRESHOLD = 50; // Threshold distance (in meters) within which user is considered to have arrived
 
 // Example usage:
+
+
+
+
+// --------------Progress Bar scripts-----------------
+var width = 0; // Define width outside of the function
+var interval; // Declare interval globally for better control
+
+function startProgressBar(number) {
+    var totalTime = number*60;
+    var progressBar = document.getElementById('progress');
+    var checkpoint1 = document.getElementById('checkpoint1');
+    var checkpoint2 = document.getElementById('checkpoint2');
+    var increment = 100 / totalTime; // Calculate increment for each second
+
+    interval = setInterval(timerFunction, 1000); // Start the timer immediately
+
+    function timerFunction() {
+        if (width >= 100) {
+            clearInterval(interval);
+        } else {
+            width += increment; // Increment width
+            progressBar.style.width = width + '%';
+            console.log('width:', width);
+            // Check if reached the first checkpoint
+            if (width >= 33 && !checkpoint1.triggered) {
+                clearInterval(interval); // Pause the timer
+                checkpoint1.triggered = true; // Mark the checkpoint as triggered
+                showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+            }
+
+            // Check if reached the second checkpoint
+            if (width >= 66 && !checkpoint2.triggered) {
+                clearInterval(interval); // Pause the timer
+                checkpoint2.triggered = true; // Mark the checkpoint as triggered
+                showCheckpointAlert('Are you okay at second checkpoint?');
+            }
+        }
+    }
+
+    function showCheckpointAlert(message, nextCheckpoint) {
+        Swal.fire({
+            title: message,
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, I\'m okay',
+            cancelButtonText: 'No, I need a break',
+            timer: 60000, // 60 seconds timeout (1 minute)
+            allowOutsideClick: false,
+            timerProgressBar: true, // Disable timer progress bar
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If confirmed, resume the timer
+                interval = setInterval(timerFunction, 1000);
+            } else {
+                // If user cancels or doesn't respond, show alert
+                Swal.fire({
+                    title: 'Take a break!',
+                    text: 'Feel free to resume when you are ready.',
+                    icon: 'info',
+                    timer: 3000 // 3 seconds timeout
+                });
+            }
+        });
+    }
+}
 
 
