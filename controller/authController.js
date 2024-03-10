@@ -31,14 +31,15 @@ const home = (req, res) => {
 const handleLogIn = async (req, res) => {
     try {
         const { mobile, password } = req.body;
-        const user = await User.findOne({ mobile: mobile })
+        const user = await User.findOne({ mobile: mobile,isVerified:true })
         if (!user) {
             return res.json({ success: false, user: false })
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            res.json({ succes: true })
+            console.log("fasjdklfhkajshdjfhajshdfhjakshdjlfhkash")
+            res.json({ success: true })
         } else {
             res.json({ success: false, user: true });
         }
