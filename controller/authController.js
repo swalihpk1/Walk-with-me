@@ -29,6 +29,13 @@ const home = async(req, res) => {
         res.status(501).send({ error: error.message })
     }
 }
+const loder = (req, res) => {
+    try {
+        res.render('loder');
+    } catch (error) {
+        res.status(501).send({ error: error.message })
+    }
+}
 
 const handleLogIn = async (req, res) => {
     try {
@@ -124,5 +131,6 @@ module.exports = {
     loadSignup,
     home,
     loadOtpPage,
-    verifyOtp
+    verifyOtp,
+    loder
 }
