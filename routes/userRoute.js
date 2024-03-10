@@ -18,6 +18,8 @@ const userMessageController  = require('../controller/userMessageController')
 userRoutes.get('/login',authMiddleware.isLogout,authController.loadLogIn);
 userRoutes.post('/login',authMiddleware.isLogout,authController.handleLogIn);
 userRoutes.get('/',authMiddleware.isLogin,authController.home);
+
+userRoutes.get('/loder',authMiddleware.isLogin,authController.loder);
 userRoutes.get('/signup',authMiddleware.isLogout,authController.loadSignup);
 userRoutes.post('/signup',authMiddleware.isLogout,authController.handleSingUp);
 userRoutes.post('/verifyOtp',authController.verifyOtp);

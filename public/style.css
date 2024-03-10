@@ -14,7 +14,7 @@ body {
 }
 
 .gradient-box {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255));
     width: 100%;
     height: 8rem
 }
@@ -25,16 +25,19 @@ body {
 }
 
 #output {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgb(255, 255, 255));
     color: #fff;
     text-align: center;
     border-radius: 5px;
     box-sizing: border-box;
+    text-align: center;
+    font-size: 2em;
+    margin: 20px auto;
 }
 
 .journeyDetails {
@@ -56,6 +59,7 @@ body {
 .touchTxt {
     color: darkmagenta;
     position: relative;
+    font-size: small;
 }
 
 
@@ -119,6 +123,7 @@ body {
 #start-btn {
     background-color: #954adb;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+    font-size: x-large;
 }
 
 #stop-btn {
@@ -269,12 +274,7 @@ body {
     text-align: center;
 }
 
-/*output box*/
-#output {
-    text-align: center;
-    font-size: 2em;
-    margin: 20px auto;
-}
+
 
 #mode {
     color: black;
@@ -289,7 +289,7 @@ body {
 /*map*/
 #googleMap {
     width: 100%;
-    height: 88vh;
+    height: 87vh;
     margin: 10px auto;
 }
 
@@ -303,6 +303,7 @@ body {
     color: rgb(138, 51, 219);
     font-size: x-large;
 }
+
 
 
 @media screen and (min-width: 800px) {
@@ -332,8 +333,27 @@ body {
         font-size: large;
         padding: 14px;
     }
-}
 
+    #start-btn {
+        font-size: large;
+    }
+
+    .gradient-box {
+        position: relative;
+        bottom: -2rem;
+        height: 7rem;
+    }
+
+    .journeyDetails {
+        position: relative;
+        bottom: -1rem;
+        font-size: x-large;
+    }
+
+    .touchTxt {
+        font-size: large;
+    }
+}
 
 @media screen and (min-width: 642px) and (max-width:800px) {
     .main-content {
@@ -366,6 +386,26 @@ body {
     .form-container {
         font-size: larger;
         padding: 14px;
+    }
+
+    #start-btn {
+        font-size: smaller;
+    }
+
+    .gradient-box {
+        position: relative;
+        bottom: -2rem;
+        height: 10rem;
+    }
+
+    .touchTxt {
+        font-size: xx-large;
+    }
+
+    .journeyDetails {
+        position: relative;
+        bottom: -1rem;
+        font-size: x-large;
     }
 }
 
@@ -402,6 +442,22 @@ body {
         font-size: medium;
         padding: 14px;
     }
+
+    #start-btn {
+        font-size: small;
+    }
+
+    .gradient-box {
+        position: relative;
+        bottom: -1rem;
+        height: 5rem;
+    }
+
+    .journeyDetails {
+        position: relative;
+        bottom: -1rem;
+        font-size: x-large;
+    }
 }
 
 
@@ -435,6 +491,26 @@ body {
     .form-control {
         font-size: 14px !important;
     }
+
+    #start-btn {
+        font-size: x-small;
+    }
+
+    .gradient-box {
+        position: relative;
+        bottom: -2rem;
+        height: 6rem;
+    }
+
+    .touchTxt {
+        font-size: small;
+    }
+
+    .journeyDetails {
+        position: relative;
+        bottom: -2rem;
+        font-size: medium;
+    }
 }
 
 
@@ -466,7 +542,7 @@ body {
     }
 
     .form-container {
-        font-size: smaller;
+        font-size: x-small;
         padding: 14px;
     }
 
@@ -474,41 +550,127 @@ body {
         font-size: 12px !important;
     }
 
+    #start-btn {
+        font-size: x-small;
+    }
 
-    @media screen and (min-width: 100px) {
-        .button-1 {
-            width: 173px;
-            height: 173px;
-            padding: 18px;
-            border-radius: 50%;
-        }
+    .gradient-box {
+        position: relative;
+        bottom: -2rem;
+        height: 5rem;
+    }
 
-        .button-p {
-            font-size: 9px;
+    .touchTxt {
+        font-size: small;
+    }
 
-        }
+    .journeyDetails {
+        position: relative;
+        bottom: -1rem;
+        font-size: medium;
+    }
+}
 
-        .homeQoute {
-            font-size: 15px;
-        }
+@media screen and (max-width: 100px) {
+    .button-1 {
+        width: 173px;
+        height: 173px;
+        padding: 18px;
+        border-radius: 50%;
+    }
 
-        .button-text {
-            color: white;
-            font-size: 48px;
-            font-style: italic;
-        }
+    .button-p {
+        font-size: 9px;
 
-        .form-container {
-            font-size: x-small;
-            padding: 14px;
-        }
+    }
 
-        .form-control {
-            font-size: 10px !important;
-        }
+    .homeQoute {
+        font-size: 15px;
+    }
 
-        /* .form-container button[type="submit"]:hover {
+    .button-text {
+        color: white;
+        font-size: 48px;
+        font-style: italic;
+    }
+
+    .form-container {
+        font-size: x-small;
+        padding: 14px;
+    }
+
+    .form-control {
+        font-size: 10px !important;
+    }
+
+    #start-btn {
+        font-size: x-small;
+    }
+
+    .gradient-box {
+        position: relative;
+        bottom: -1rem;
+        height: 5rem;
+    }
+
+    .journeyDetails {
+        position: relative;
+        bottom: -1rem;
+        font-size: medium;
+    }
+
+    /* .form-container button[type="submit"]:hover {
             font-size: x-large;
         } */
+}
+
+
+/* PRELOADER CSS */
+.page-loader {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.page-loader img.logo {
+    width: 300px;
+    height: auto;
+    animation: logo-scale 2s infinite ease-in-out;
+    animation-fill-mode: forwards;
+    position: absolute;
+}
+
+@keyframes logo-scale {
+    0% {
+        transform: scale(0.8);
     }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(0.8);
+    }
+}
+
+@keyframes logo-move {
+    0% {
+        top: 50%;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+.page-loader img.logo.loaded {
+    animation: logo-move 2s forwards;
 }
