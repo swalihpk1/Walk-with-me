@@ -70,8 +70,32 @@ const handleSingUp = async (req, res) => {
         await user.save();
         res.json({ message: 'usercreated;' })
     } catch (error) {
-        console.log("error on handleLoginIn", error)
-        res.status(401).send({ error: error.message })
+        console.error("Error on handleSignUp:", error);
+        res.status(500).json({ error: error.message });
+    }
+};
+const loadOtpPage = async (req, res) => {
+    try {
+       res.render('otp');
+    } catch (error) {
+        console.error("Error on loadOtpPage", error);
+        res.status(500).json({ error: error.message });ver
+    }
+}
+
+const verifyOtp = async (req, res) => {
+    try {
+        const { num1, num2, num3, num4 } = req.body;
+        let enteredOtp = Number(`${num1}${num2}${num3}${num4}`);
+        let userId = req.session.signup_id;
+        let isOtpCrct = await Otp.findOne({userId:userId,otp:enteredOtp});
+        if(isOtpCrct.otp === enteredOtp){
+            return res.json({success:true,message:"otp is corrected"});
+        }
+        return res.json({success:false,message:"otp is incorrect"})
+    } catch (error) {
+        console.error("Error on verifyOtp:", error);
+        res.status(500).json({ error: error.message });
     }
 }
 

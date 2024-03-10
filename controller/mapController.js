@@ -9,7 +9,7 @@ const loadMap = async(req,res)=>{
 
 const safetyMap = async(req,res)=>{
     try {
-        res.render('safetyMap');
+        res.render('safetymap');
     } catch (error) {
         console.log(error.message);
     }
