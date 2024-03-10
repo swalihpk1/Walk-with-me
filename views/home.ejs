@@ -1,20 +1,33 @@
 <%- include('./layouts/header.ejs') -%>
 
-<main class="pt-5">
-    <div class="section-1">
-        <div class="container-fluid section-1-main pt-4">
+    <main class="pt-5">
+
+        <div class="page-loader">
+            <img src="/img/Picsart_24-03-07_23-16-24-066.png" alt="Your Logo" class="logo">
+
         </div>
-        <div class="start-button d-flex justify-content-center align-items-center">
-            <button class="button-1" id="button1">
-                <h1 class="button-text m-0">Start</h1>
-                <p class="button-p">journey with us</p>
-            </button>
+
+        <div class="content1">
+            <div class="section-1">
+                <div class="container-fluid section-1-main pt-4">
+                </div>
+                <div class="start-button d-flex justify-content-center align-items-center">
+                    <button class="button-1" id="button1">
+                        <h1 class="button-text m-0">Start</h1>
+                        <p class="button-p">journey with us</p>
+                    </button>
+                </div>
+                <div class="homeQoute-container">
+                    <h4 class="text-center homeQoute">"Walk alone without fear"</h4>
+                </div>
+            </div>
         </div>
-        <div class="homeQoute-container">
-            <h4 class="text-center homeQoute">"Walk alone without fear"</h4>
-        </div>
-    </div>
-</main>
+    </main>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         window.addEventListener('load', function () {
@@ -23,13 +36,20 @@
 
 
         document.getElementById('button1').addEventListener('click', function () {
-                document.querySelector('.section-1').style.transition = 'transform 0.8s'; 
-                document.querySelector('.section-1').style.transform = 'scale(0)'; 
+            document.querySelector('.section-1').style.transition = 'transform 0.8s';
+            document.querySelector('.section-1').style.transform = 'scale(0)';
 
-                setTimeout(function () {
-                    window.location.href = '/safetymap'; 
-                }, 1300);
-            });
+            setTimeout(function () {
+                window.location.href = '/safetymap';
+            }, 1300);
+        });
+
+
+        $(window).on('load', function () {
+            setTimeout(function () {
+                $('.page-loader').fadeOut('slow');
+            },2000);
+        });
 
     </script>
 
