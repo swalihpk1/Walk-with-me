@@ -23,8 +23,7 @@ const loadSignup = (req, res) => {
 }
 const home = async(req, res) => {
     try {
-        let user = await User.findOne({_id:req.session.user_id})
-        res.render('home',{user});
+        res.render('home');
     } catch (error) {
         console.log("error on loadSignup", error);
         res.status(501).send({ error: error.message })

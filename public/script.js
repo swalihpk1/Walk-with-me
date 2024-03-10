@@ -91,6 +91,7 @@ var directionsDisplay = new google.maps.DirectionsRenderer();
 
 function calcRoute() {
     // Show the stop button
+    document.getElementById('start-btn').style.display = 'none';
     document.getElementById('stop-btn').style.display = 'block';
 
     // Create a DirectionsService object to use the route method and get a result for our request
@@ -256,7 +257,7 @@ function stopLiveTracking() {
         watchId = undefined;
     }
     document.getElementById('start-btn').style.display = 'block';
-    document.getElementById('stop-btn').style.display = 'block';
+    document.getElementById('stop-btn').style.display = 'none';
 
     // Clear the directions displayed on the map
     directionsDisplay.setDirections({ routes: [] });
