@@ -9,11 +9,11 @@ const sendWhatsappMessage = (phoneNumber, message) => {
             'headers': {
             },
             formData: {
-              'appkey': '820a74a6-3c5e-4943-a419-3703be3cd9ae',
-              'authkey': 'vweTmUwDFZSD46Z3umCltLk0ewdklZ3UWG5O1rtKSUguVWbbMb',
+              'appkey': '8bed1cad-b447-4b99-bd9f-73592d01be69',
+              'authkey': 'RjKmMDn3YCig5w69Ut1iUpZke6HbqtM0jbfLtsuAGqqDyvBa6S',
               'to': phoneNumber,
               'message': message
-            }
+            }
           };
         console.log(phoneNumber,message)
 

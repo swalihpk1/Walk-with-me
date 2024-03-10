@@ -8,47 +8,53 @@
             <form id="registrationForm">
               <div class="form-group mb-3">
                 <label for="username">Username *</label>
-                <input type="text" class="form-control" id="username" name="username" required>
+                <input type="text" class="form-control" id="username" name="name">
+                <p id="username_msg" style="display: none; color: brown;"></p>
               </div>
               <div class="form-group mb-3">
                 <label for="Mobile">Mobile *</label>
-                <input type="number" class="form-control" id="Mobile" name="Mobile" required>
+                <input type="number" class="form-control" id="Mobile" name="mobile">
+                <p id="mobile_msg" style="display: none; color:brown;"></p>
               </div>
               <div class="form-group mb-3">
                 <label for="password">Password *</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password">
+                <p id="password_msg" style="display: none; color: brown;"></p>
               </div>
               <div class="form-group mb-3">
                 <label for="confirmPassword">Confirm Password *</label>
-                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                <p id="confirmpas_msg" style="display: none; color: brown;"></p>
               </div>
               <label for="">Trustuble person's numbers *</label>
               <div class="row">
                 <div class="col-6">
                   <div class="form-group mb-3">
                     <label for="mobile1">Mobile 1</label>
-                    <input type="number" class="form-control" id="mobile1" name="mobile1" required>
+                    <input type="number" class="form-control" id="mobile1" name="emgNum1">
+                    <p id="emgNum2_msg" style="display: none; color: brown;"></p>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group mb-3">
                     <label for="mobile2">Mobile 2</label>
-                    <input type="number" class="form-control" id="mobile2" name="mobile2" required>
+                    <input type="number" class="form-control" id="mobile2" name="emgNum2">
+                    <p id="emgNum1_msg" style="display: none ; color: brown;"></p>
                   </div>
                 </div>
               </div>
               <div class="form-group mb-3">
                 <label for="gender">Gender *</label><br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="male" value="male" required>
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
                   <label class="form-check-label" for="male">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="female" value="female" required>
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="female">
                   <label class="form-check-label" for="female">Female</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender" id="other" value="other" required>
+                  <input class="form-check-input" type="radio" name="gender" id="other" value="other">
                   <label class="form-check-label" for="other">Other</label>
                 </div>
               </div>
@@ -73,16 +79,29 @@
         let mobileMsg = document.getElementById('mobile_msg');
         let passwordMsg = document.getElementById('password_msg');
         let usernameMsg = document.getElementById('username_msg');
-        let confirmPasswordMsg = document.getElementById('confirmpas_msg')
+        let confirmPasswordMsg = document.getElementById('confirmpas_msg');
         let mobile = document.getElementById('Mobile').value;
         let password = document.getElementById('password').value;
         let confirmPassword = document.getElementById('confirmPassword').value;
         let username = document.getElementById('username').value;
+        let emgNum1 = document.getElementById('mobile1').value;
+        let emgNum2 = document.getElementById('mobile2').value;
+        let genderInputs = document.getElementsByName('gender');
+        let selectedGender = '';
+        for (let i = 0; i < genderInputs.length; i++) {
+          if (genderInputs[i].checked) {
+            selectedGender = genderInputs[i].value;
+            break;
+          }
+        }
 
         mobileMsg.style.display = 'none';
         passwordMsg.style.display = 'none';
         usernameMsg.style.display = 'none';
         confirmPasswordMsg.style.display = 'none';
+        emgNum1_msg.style.display = 'none';
+        emgNum2_msg.style.display = 'none';
+
         let validate = true;
 
         if (username.trim() === '') {
@@ -102,9 +121,29 @@
           passwordMsg.style.display = 'block';
           validate = false;
         }
-        if (password !== confirmPassword || confirmPassword.trim() == '') {
-          confirmPasswordMsg.textContent = 'Password is not match';
+
+        if (confirmPassword.trim() === '') {
+          confirmPasswordMsg.textContent = 'Confirm Password is required.';
           confirmPasswordMsg.style.display = 'block';
+          validate = false;
+        }
+
+        if (emgNum1.trim() === '') {
+          emgNum1_msg.textContent = 'Emergency Number 1 is required.';
+          emgNum1_msg.style.display = 'block';
+          validate = false;
+        }
+
+        if (emgNum2.trim() === '') {
+          emgNum2_msg.textContent = 'Emergency Number 2 is required.';
+          emgNum2_msg.style.display = 'block';
+          validate = false;
+        }
+        if (confirmPassword != password) {
+
+          console.log(confirmPassword == password)
+          passwordMsg.textContent = 'Password is not same';
+          passwordMsg.style.display = 'block';
           validate = false;
         }
 
@@ -118,14 +157,20 @@
               body: JSON.stringify({
                 name: username,
                 mobile: mobile,
-                password: password
+                password: password,
+                emgNum1: emgNum1,
+                emgNum2: emgNum2,
+                gender: selectedGender
               })
             });
-
-            if (response.ok) {
-              // Handle successful registration
+            let data = await response.json();
+            if (data.success) {
+              console.log("user created")
+              window.location.href = '/otp';
             } else {
-              // Handle registration failure
+              console.log(data)
+              mobileMsg.textContent = 'Mobile already there.';
+              mobileMsg.style.display = 'block';
             }
           } catch (error) {
             console.error('Error:', error);

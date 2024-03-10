@@ -1,6 +1,7 @@
 const User = require('../model/user-model');
 const bcrypt = require('bcrypt')
-
+const sendWhatsapp = require('../services/sendWhatsappMessage')
+const Otp = require('../model/otp-model')
 
 const loadLogIn = (req, res) => {
     try {
@@ -29,46 +30,64 @@ const home = (req, res) => {
 
 const handleLogIn = async (req, res) => {
     try {
-        const { mobile ,password} = req.body;
+        const { mobile, password } = req.body;
         const user = await User.findOne({ mobile: mobile })
         if (!user) {
-            return res.json({success:false,user:false })
+            return res.json({ success: false, user: false })
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            res.json({succes:true})
+            res.json({ succes: true })
         } else {
-            res.json({ success: false ,user:true });
+            res.json({ success: false, user: true });
         }
     } catch (error) {
         console.log("error on handleLogin", error);
         res.status(501).send({ error: error.message })
     }
 }
+
 const handleSingUp = async (req, res) => {
     try {
         const { name, mobile, gender, emgNum1, emgNum2, password } = req.body;
-        let isUser = await User.findOne({mobile:mobile});
-        if(isUser){
-            return res.json({message:"user already there"})
+        let isUser = await User.findOne({ mobile: mobile, isVerified: true });
+        if (isUser) {
+            console.log("success:afle")
+            return res.json({ success: false })
         }
         if (!name || !mobile || !gender || !emgNum1 || !emgNum2 || !password) {
             return res.status(400).json({ error: 'Missing required fields.' });
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        let user = new User({
-            name,
-            mobile,
-            gender,
-            emergency_contacts: [
-                emgNum1,
-                emgNum2
-            ],
-            password:hashedPassword
-        })
-        await user.save();
-        res.json({ message: 'usercreated;' })
+
+        let user = await User.findOneAndUpdate(
+            { mobile: mobile,isVerified:false },
+            {
+                $set: {
+                    name,
+                    mobile,
+                    gender,
+                    emergency_contacts: [
+                        emgNum1,
+                        emgNum2
+                    ],
+                    password: hashedPassword
+                }
+            },
+            { upsert: true,new: true, }
+        )
+        console.log(user,"*************")
+        const otpValue = Math.floor(1000 + Math.random() * 9000);
+        await Otp.findOneAndUpdate(
+            { user_id: user._id },
+            { $set: { otp: otpValue } },
+            { upsert: true }
+        );
+        const otpMessage = `Your WALK WITH ME verification code is *${otpValue}*.\n\nEnter this code to verify your account.\n\nThank you for choosing WALK WITH ME!`;
+        sendWhatsapp.sendWhatsappMessage(`91${mobile}`, otpMessage)
+        req.session.signup_id = user._id;
+        res.json({ success: true })
     } catch (error) {
         console.error("Error on handleSignUp:", error);
         res.status(500).json({ error: error.message });
@@ -76,23 +95,33 @@ const handleSingUp = async (req, res) => {
 };
 const loadOtpPage = async (req, res) => {
     try {
-       res.render('otp');
+        res.render('otp');
     } catch (error) {
         console.error("Error on loadOtpPage", error);
-        res.status(500).json({ error: error.message });ver
+        res.status(500).json({ error: error.message }); ver
     }
 }
 
 const verifyOtp = async (req, res) => {
     try {
         const { num1, num2, num3, num4 } = req.body;
+        console.log(req.body)
         let enteredOtp = Number(`${num1}${num2}${num3}${num4}`);
         let userId = req.session.signup_id;
-        let isOtpCrct = await Otp.findOne({userId:userId,otp:enteredOtp});
-        if(isOtpCrct.otp === enteredOtp){
-            return res.json({success:true,message:"otp is corrected"});
+        console.log(userId,"userID")
+        let isOtpCrct = await Otp.findOne({ user_id: userId, otp: enteredOtp });
+        console.log(isOtpCrct)
+        if(isOtpCrct){
+            if (isOtpCrct.otp === enteredOtp) {
+                await User.updateOne({
+                    _id:userId
+                },{$set:{
+                    isVerified:true
+                }});
+                return res.redirect('/login');
+            }
         }
-        return res.json({success:false,message:"otp is incorrect"})
+        return res.json({ success: false, message: "otp is incorrect" })
     } catch (error) {
         console.error("Error on verifyOtp:", error);
         res.status(500).json({ error: error.message });
@@ -105,5 +134,7 @@ module.exports = {
     handleSingUp,
     handleLogIn,
     loadSignup,
-    home
+    home,
+    loadOtpPage,
+    verifyOtp
 }
