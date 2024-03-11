@@ -28,7 +28,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-      window.addEventListener('load', function () {
+        window.addEventListener('load', function () {
             setTimeout(function () {
                 document.querySelector('.homeQoute').classList.add('show');
             }, 2000); // Delaying the transition start by 2000 milliseconds (2 seconds)
@@ -47,6 +47,22 @@
             setTimeout(function () {
                 $('.page-loader').fadeOut('slow');
             }, 2000);
+        });
+
+        // Function to display location popup and dismiss after 3 seconds
+        function displayLocationPopup() {
+            Swal.fire({
+                title: 'Please turn on your location',
+                text: 'We need your location to provide accurate information.',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 4000 // Automatically dismiss after 3 seconds
+            });
+        }
+
+        // Call the function after 3 seconds of page load
+        window.addEventListener('load', function () {
+            setTimeout(displayLocationPopup, 3000);
         });
 
     </script>

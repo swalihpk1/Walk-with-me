@@ -295,7 +295,7 @@ function resumeProgressBar() {
     paused = false;
     document.getElementById('pause-btn').style.display = 'block';
     document.getElementById('resume-btn').style.display = 'none'; // This line hides the resume button
-     // Start the timer
+    // Start the timer
 }
 
 function startProgressBar(number) {
@@ -309,28 +309,44 @@ function startProgressBar(number) {
 
     function timerFunction() {
         if (!paused) { // Check if the progress bar is not paused
-          if (width >= 100) {
-            clearInterval(interval);
-          } else {
-            width += increment; // Increment width
-            progressBar.style.width = width + '%';
-            console.log('width:',width);
-            // Check if reached the first checkpoint
-            if (width >= 33 && !checkpoint1.triggered) {
-              clearInterval(interval); // Pause the timer
-              checkpoint1.triggered = true; // Mark the checkpoint as triggered
-              showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+            if (width >= 100) {
+                clearInterval(interval);
+                // Show success message using SweetAlert
+                Swal.fire({
+                    title: 'Journey Completed!',
+                    text: 'Your journey has been successfully completed. You are so Courageous!',
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonText: 'Alright',
+                    showConfirmButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect to /safetymap when "Alright" is clicked
+                        window.location.href = "/safetymap";
+                    }
+                });
+            } else {
+                width += increment; // Increment width
+                progressBar.style.width = width + '%';
+                console.log('width:', width);
+                // Check if reached the first checkpoint
+                if (width >= 33 && !checkpoint1.triggered) {
+                    clearInterval(interval); // Pause the timer
+                    checkpoint1.triggered = true; // Mark the checkpoint as triggered
+                    showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+                }
+
+                // Check if reached the second checkpoint
+                if (width >= 66 && !checkpoint2.triggered) {
+                    clearInterval(interval); // Pause the timer
+                    checkpoint2.triggered = true; // Mark the checkpoint as triggered
+                    showCheckpointAlert('Are you okay at second checkpoint?');
+                }
             }
-    
-            // Check if reached the second checkpoint
-            if (width >= 66 && !checkpoint2.triggered) {
-              clearInterval(interval); // Pause the timer
-              checkpoint2.triggered = true; // Mark the checkpoint as triggered
-              showCheckpointAlert('Are you okay at second checkpoint?');
-            }
-          }
         }
-      }
+    }
+
+
 
     function showCheckpointAlert(message, nextCheckpoint) {
         Swal.fire({
@@ -360,7 +376,7 @@ function startProgressBar(number) {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // If confirmed, resume the timer
-                      
+
                     } else {
                         interval = setInterval(timerFunction, 1000);
                     }
