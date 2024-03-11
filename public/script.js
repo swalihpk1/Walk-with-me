@@ -382,7 +382,7 @@ function startProgressBar(number) {
                         We hope you're well.  We're reaching out because your friend hasn't responded to our recent messages, and we want to ensure her safety.
                         
                         For your information:
-                        - Last Known Location: https://www.google.com/maps/dir//${latitude},${longitude}/@11.1895,75.8698,15z/data=!4m2!4m1!3e2?entry=ttu 
+                        - Last Known Location: https://www.google.com/maps/dir//${latitude},${longitude}/@${latitude},${longitude},15z/data=!4m2!4m1!3e2?entry=ttu 
                         
                         We kindly ask for your assistance in checking on her to make sure she is not in any danger. If possible, please try reaching out to her or physically check her location.
                         `;
