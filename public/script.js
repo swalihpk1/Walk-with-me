@@ -283,6 +283,21 @@ const ARRIVAL_THRESHOLD = 50; // Threshold distance (in meters) within which use
 // --------------Progress Bar scripts-----------------
 var width = 0; // Define width outside of the function
 var interval; // Declare interval globally for better control
+var paused = false;
+
+function pauseProgressBar() {
+    paused = true;
+    document.getElementById('pause-btn').style.display = 'none';
+    document.getElementById('resume-btn').style.display = 'block';
+}
+
+function resumeProgressBar() {
+    paused = false;
+    document.getElementById('pause-btn').style.display = 'block';
+    document.getElementById('resume-btn').style.display = 'none'; // This line hides the resume button
+     // Start the timer
+}
+
 function startProgressBar(number) {
     var totalTime = number * 60;
     var progressBar = document.getElementById('progress');
@@ -293,27 +308,29 @@ function startProgressBar(number) {
     interval = setInterval(timerFunction, 1000); // Start the timer immediately
 
     function timerFunction() {
-        if (width >= 100) {
+        if (!paused) { // Check if the progress bar is not paused
+          if (width >= 100) {
             clearInterval(interval);
-        } else {
+          } else {
             width += increment; // Increment width
             progressBar.style.width = width + '%';
-            console.log('width:', width);
+            console.log('width:',width);
             // Check if reached the first checkpoint
             if (width >= 33 && !checkpoint1.triggered) {
-                clearInterval(interval); // Pause the timer
-                checkpoint1.triggered = true; // Mark the checkpoint as triggered
-                showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+              clearInterval(interval); // Pause the timer
+              checkpoint1.triggered = true; // Mark the checkpoint as triggered
+              showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
             }
-
+    
             // Check if reached the second checkpoint
             if (width >= 66 && !checkpoint2.triggered) {
-                clearInterval(interval); // Pause the timer
-                checkpoint2.triggered = true; // Mark the checkpoint as triggered
-                showCheckpointAlert('Are you okay at second checkpoint?');
+              clearInterval(interval); // Pause the timer
+              checkpoint2.triggered = true; // Mark the checkpoint as triggered
+              showCheckpointAlert('Are you okay at second checkpoint?');
             }
+          }
         }
-    }
+      }
 
     function showCheckpointAlert(message, nextCheckpoint) {
         Swal.fire({
