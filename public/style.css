@@ -137,6 +137,7 @@ body {
     position: absolute;
     left: 50%;
     font-size: small;
+    border: 4px white double !important;
     top: 0;
     margin-top: 1%;
 }
@@ -151,6 +152,7 @@ body {
     left: 50%;
     font-size: small;
     top: 0;
+    border: 4px white double !important;
     margin-top: 1%;
     display: none;
 }
@@ -415,9 +417,11 @@ body {
     top: 15%;
     right: 1%;
     z-index: 1;
-    background-color: rgb(191, 0, 0) !important;
-    color: #fff !important;
+    background-color: white !important;
+    color: #ff0000 !important;
+    border: 1px red groove !important;
 }
+
 
 
 @media screen and (min-width: 800px) {
