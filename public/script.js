@@ -91,7 +91,6 @@ var directionsDisplay = new google.maps.DirectionsRenderer();
 function calcRoute() {
     // Show the stop button
     document.getElementById('start-btn').style.display = 'none';
-    document.getElementById('stop-btn').style.display = 'block';
 
     // Create a DirectionsService object to use the route method and get a result for our request
     var directionsService = new google.maps.DirectionsService();
@@ -100,6 +99,7 @@ function calcRoute() {
     if (!directionsDisplay.getMap()) {
         directionsDisplay.setMap(map);
     }
+
     // Create request
     directionsDisplay.setOptions({
         polylineOptions: {
@@ -119,7 +119,7 @@ function calcRoute() {
             travelMode: google.maps.TravelMode.WALKING, // WALKING, BYCYCLING, TRANSIT
             unitSystem: google.maps.UnitSystem.METRIC
         }
-        console.log('origin:', request.origin);
+
         // Pass the request to the route method
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
@@ -127,19 +127,15 @@ function calcRoute() {
                 const output = document.querySelector('#output');
                 output.innerHTML = "<div class='journeyDetails' style='text-align: left;'>" + "<span style='background-color: rgba(77, 9, 141, 0.8); color: white; border-radius: 20px; padding: 5px 10px; display: inline-block; margin-bottom: 10px;'>" + result.routes[0].legs[0].duration.text + "</span>  " + result.routes[0].legs[0].distance.text + "</div>";
 
-
-
                 directionsDisplay.setDirections({ routes: [] });
                 // Display route
                 directionsDisplay.setDirections(result);
                 startLiveTracking(); // Start live tracking after route calculation
-
+                startProgressBar(30); // Adjust the number of minutes as needed
                 setTimeout(function () {
                     $("#dropdown-container").removeClass("d-none");
                     $("#dimmer-overlay").removeClass("d-none");
                 }, 2000);
-
-
             } else {
                 // Delete route from map
                 directionsDisplay.setDirections({ routes: [] });
@@ -152,6 +148,7 @@ function calcRoute() {
         });
     })
 }
+
 
 function submitNumber() {
     // Handle the submitted number from the dropdown
@@ -264,7 +261,6 @@ function stopLiveTracking() {
         watchId = undefined;
     }
     document.getElementById('start-btn').style.display = 'block';
-    document.getElementById('stop-btn').style.display = 'none';
 
     // Clear the directions displayed on the map
     directionsDisplay.setDirections({ routes: [] });
@@ -287,9 +283,8 @@ const ARRIVAL_THRESHOLD = 50; // Threshold distance (in meters) within which use
 // --------------Progress Bar scripts-----------------
 var width = 0; // Define width outside of the function
 var interval; // Declare interval globally for better control
-
 function startProgressBar(number) {
-    var totalTime = number*60;
+    var totalTime = number * 60;
     var progressBar = document.getElementById('progress');
     var checkpoint1 = document.getElementById('checkpoint1');
     var checkpoint2 = document.getElementById('checkpoint2');
@@ -323,28 +318,37 @@ function startProgressBar(number) {
     function showCheckpointAlert(message, nextCheckpoint) {
         Swal.fire({
             title: message,
-            icon: 'question',
             showCancelButton: true,
-            confirmButtonText: 'Yes, I\'m okay',
-            cancelButtonText: 'No, I need a break',
+            confirmButtonText: 'Yes, I\'m cool',
+            cancelButtonText: 'No, feeling fishy',
             timer: 60000, // 60 seconds timeout (1 minute)
             allowOutsideClick: false,
             timerProgressBar: true, // Disable timer progress bar
+            cancelButtonClass: 'bg-danger' // Add custom class to cancel button
         }).then((result) => {
             if (result.isConfirmed) {
                 // If confirmed, resume the timer
                 interval = setInterval(timerFunction, 1000);
             } else {
-                // If user cancels or doesn't respond, show alert
                 Swal.fire({
-                    title: 'Take a break!',
-                    text: 'Feel free to resume when you are ready.',
-                    icon: 'info',
-                    timer: 3000 // 3 seconds timeout
+                    title: 'really!',
+                    text: 'So, we are forwarding alert to your relatives',
+                    icon: 'warning',
+                    confirmButtonText: 'Yes, hurry up!',
+                    showConfirmButton: true, // Ensure the OK button is shown
+                    showCancelButton: true,
+                    cancelButtonText: "Nop it's ok",
+                    allowOutsideClick: false, // Prevent closing by clicking outside the modal
+                    allowEscapeKey: false // Prevent closing by pressing Esc key
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If confirmed, resume the timer
+                      
+                    } else {
+                        interval = setInterval(timerFunction, 1000);
+                    }
                 });
             }
         });
     }
 }
-
-

@@ -2,77 +2,82 @@
 
 
     <body class="p-0">
-        <main>
-
             <main>
                 <div id="map-container" class="position-relative">
                     <button class="btn stopBtn rounded-pill">Stop</button>
-                    <div id="googleMap">
-
-                    </div>
+                    <div id="googleMap"></div>
                 </div>
-
+            
                 <div id="output" class="position-absolute bottom-0 start-50 translate-middle-x">
                     <div id="gradient-box" class="gradient-box">
                         <p class="text-center touchTxt">Touch your destination</p>
                         <div class="d-flex justify-content-center mt-3">
                             <button class="btn rounded-pill text-white border-0 mr-2" id="start-btn"
                                 onclick="calcRoute();">Start</button>
-                           
                         </div>
-
                     </div>
                 </div>
+            
                 <input type="hidden" id="from" placeholder="Origin" class="form-control">
                 <input type="hidden" id="to" placeholder="Destination" class="form-control">
-                </div>
-
+            
                 <div id="dropdown-container" class="dropdown-container d-none fixed-top m-3">
                     <div class="d-flex justify-content-center align-items-center h-100">
                         <div class="card rounded border-0 p-4">
                             <p class="card-title">How much time will it take to reach your destination?</p>
-                            <input type="number" id="dropdown-number" class="form-control mb-3"
-                                placeholder="in minutes">
+                            <input type="number" id="dropdown-number" class="form-control mb-3" placeholder="in minutes">
                             <button class="btn btn-primary text-white" style="background-color: rgb(127 81 187);"
                                 onclick="submitNumber()">Submit</button>
                         </div>
                     </div>
                 </div>
-
+            
                 <div id="tracking-content" class="tracking-content">
                     <div id="progress-bar">
                         <div id="progress"></div>
-                        <!-- Labels for start and end points -->
                         <div class="label start-label">Start</div>
-                        <button class="btn rounded-pill text-white border-0" style="display: none;" id="stop-btn"
-                            onclick="stopLiveTracking()">Stop</button>
+                        <button class="btn rounded-pill text-white border-0 mr-2 pauseBtn" id="pause-btn"
+                            onclick="pauseProgressBar()">Pause</button>
+                        <button class="btn rounded-pill text-white border-0 resumeBtn" id="resume-btn"
+                            onclick="resumeProgressBar()">Resume</button>
                         <div class="label end-label">End</div>
                     </div>
                     <div id="checkpoint1" class="checkpoint"></div>
                     <div id="checkpoint2" class="checkpoint"></div>
                 </div>
-
+            
                 <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
             </main>
 
             <script>
-                var width = 0; // Define width outside of the function
                 var interval; // Declare interval globally for better control
-                var paused = false; // Variable to track if the progress is paused
+                var paused = false; // Flag to track if the progress is paused
 
-                // Function to pause or resume the progress
-                function pauseResumeProgress() {
-                    if (!paused) {
-                        clearInterval(interval); // Pause the timer
-                        document.getElementById('pause-resume-btn').innerText = 'Resume'; // Change button text to 'Resume'
-                    } else {
-                        interval = setInterval(timerFunction, 1000); // Resume the timer
-                        document.getElementById('pause-resume-btn').innerText = 'Pause'; // Change button text to 'Pause'
-                    }
-                    paused = !paused; // Toggle the paused state
+                function pauseProgressBar() {
+                    clearInterval(interval); // Stop the timer
+                    paused = true;
+                    document.getElementById('pause-btn').style.display = 'none';
+                    document.getElementById('resume-btn').style.display = 'block';
                 }
 
-                document.getElementById('pause-resume-btn').addEventListener('click', pauseResumeProgress);
+                function resumeProgressBar() {
+                    paused = false;
+                    document.getElementById('pause-btn').style.display = 'block';
+                    document.getElementById('resume-btn').style.display = 'none'; // This line hides the resume button
+                    interval = setInterval(timerFunction, 1000); // Start the timer
+                }
+
+                function startProgressBar(number) {
+                    // Define the timer function
+                    function timerFunction() {
+                        if (!paused) {
+                            // Your existing code for the timerFunction
+                        }
+                    }
+
+                    // Start the timer
+                    interval = setInterval(timerFunction, 1000);
+                }
             </script>
 
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

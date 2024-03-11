@@ -129,10 +129,32 @@ body {
     font-size: x-large;
 }
 
-#stop-btn {
+#pause-btn {
     background-color: #954adb;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+    margin-left: 1rem;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    font-size: small;
+    top: 0;
+    margin-top: 1%;
 }
+
+
+#resume-btn {
+    background-color: #954adb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(14, 13, 13, 0);
+    margin-left: 1rem;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    font-size: small;
+    top: 0;
+    margin-top: 1%;
+    display: none;
+}
+
 
 .homeQoute.show {
     bottom: -70px;
@@ -393,7 +415,7 @@ body {
     top: 15%;
     right: 1%;
     z-index: 1;
-    background-color: rgb(191, 0, 0)!important;
+    background-color: rgb(191, 0, 0) !important;
     color: #fff !important;
 }
 

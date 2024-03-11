@@ -1,139 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Progress Bar</title>
-<link rel="stylesheet" href="style.css">
-<!-- Include SweetAlert library -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Bar</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Include SweetAlert library -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <style>
     #progress-bar {
-    width: 100%;
-    height: 50px; /* Increased height for better visibility */
-    background-color: #f0f0f0;
-    position: relative;
-    border-radius: 25px; /* Increased border-radius to make it more rounded */
-    overflow: hidden;
-    display: flex; /* Use flexbox to align checkpoints horizontally */
-  }
-  
-  #progress {
-    width: 0%;
-    height: 100%;
-    background-color: #4caf50;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 25px; /* Match the border-radius of progress bar */
-    transition: width 0.5s ease; /* Smooth transition for progress width */
-  }
-  
-  .checkpoint {
-    width: 50px; /* Adjust checkpoint width */
-    height: 50px; /* Adjust checkpoint height */
-    background-color: #ffffff; /* Orange color for checkpoints */
-    border: 1px solid rgb(173, 173, 173);
-    border-radius: 50%; /* Make checkpoints round */
-    position: absolute;
-    /* top: 50%; Position checkpoints in the middle vertically */
-    transform: translateY(-50%); /* Center the checkpoints vertically */
-    z-index: 2; /* Ensure checkpoints are above progress bar */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow for depth effect */
-  }
-  
-  #checkpoint1 {
-    left: 33%; /* Position first checkpoint */
-  }
-  
-  #checkpoint2 {
-    left: 66%; /* Position second checkpoint */
-  }
-  
-  /* Style for when hovering over checkpoints */
-  .checkpoint:hover {
-    background-color: #ffbb33; /* Lighter shade of orange */
-    cursor: pointer; /* Change cursor to pointer */
-  }
-</style>
-</head>
-<body>
-<label for="total-time">Enter total time (in seconds):</label>
-<input type="number" id="total-time" min="1">
-<button onclick="startProgressBar()">Start</button>
-
-<div id="progress-bar">
-  <div id="progress"></div>
-</div>
-<!-- Checkpoints outside the progress bar -->
-<div id="checkpoint1" class="checkpoint"></div>
-<div id="checkpoint2" class="checkpoint"></div>
-
-<script>
-var width = 0; // Define width outside of the function
-var interval; // Declare interval globally for better control
-
-function startProgressBar() {
-  var totalTime = parseInt(document.getElementById('total-time').value);
-  var progressBar = document.getElementById('progress');
-  var checkpoint1 = document.getElementById('checkpoint1');
-  var checkpoint2 = document.getElementById('checkpoint2');
-  var increment = 100 / totalTime; // Calculate increment for each second
-
-  interval = setInterval(timerFunction, 1000); // Start the timer immediately
-
-  function timerFunction() {
-    if (width >= 100) {
-      clearInterval(interval);
-    } else {
-      width += increment; // Increment width
-      progressBar.style.width = width + '%';
-        console.log('width:',width);
-      // Check if reached the first checkpoint
-      if (width >= 33 && !checkpoint1.triggered) {
-        clearInterval(interval); // Pause the timer
-        checkpoint1.triggered = true; // Mark the checkpoint as triggered
-        showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
-      }
-
-      // Check if reached the second checkpoint
-      if (width >= 66 && !checkpoint2.triggered) {
-        clearInterval(interval); // Pause the timer
-        checkpoint2.triggered = true; // Mark the checkpoint as triggered
-        showCheckpointAlert('Are you okay at second checkpoint?');
-      }
+      width: 100%;
+      height: 50px;
+      /* Increased height for better visibility */
+      background-color: #f0f0f0;
+      position: relative;
+      border-radius: 25px;
+      /* Increased border-radius to make it more rounded */
+      overflow: hidden;
+      display: flex;
+      /* Use flexbox to align checkpoints horizontally */
     }
-  }
 
-  function showCheckpointAlert(message, nextCheckpoint) {
-    Swal.fire({
-      title: message,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, I\'m okay',
-      cancelButtonText: 'No, I need a break',
-      timer: 60000, // 60 seconds timeout (1 minute)
-      allowOutsideClick: false,
-      timerProgressBar: true, // Disable timer progress bar
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // If confirmed, resume the timer
-        interval = setInterval(timerFunction, 1000);
-      } else {
-        // If user cancels or doesn't respond, show alert
+    #progress {
+      width: 0%;
+      height: 100%;
+      background-color: #4caf50;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 25px;
+      /* Match the border-radius of progress bar */
+      transition: width 0.5s ease;
+      /* Smooth transition for progress width */
+    }
+
+    .checkpoint {
+      width: 50px;
+      /* Adjust checkpoint width */
+      height: 50px;
+      /* Adjust checkpoint height */
+      background-color: #ffffff;
+      /* Orange color for checkpoints */
+      border: 1px solid rgb(173, 173, 173);
+      border-radius: 50%;
+      /* Make checkpoints round */
+      position: absolute;
+      /* top: 50%; Position checkpoints in the middle vertically */
+      transform: translateY(-50%);
+      /* Center the checkpoints vertically */
+      z-index: 2;
+      /* Ensure checkpoints are above progress bar */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      /* Add shadow for depth effect */
+    }
+
+    #checkpoint1 {
+      left: 33%;
+      /* Position first checkpoint */
+    }
+
+    #checkpoint2 {
+      left: 66%;
+      /* Position second checkpoint */
+    }
+
+    /* Style for when hovering over checkpoints */
+    .checkpoint:hover {
+      background-color: #ffbb33;
+      /* Lighter shade of orange */
+      cursor: pointer;
+      /* Change cursor to pointer */
+    }
+  </style>
+</head>
+
+<body>
+  <label for="total-time">Enter total time (in seconds):</label>
+  <input type="number" id="total-time" min="1">
+  <button onclick="startProgressBar()">Start</button>
+
+  <div id="progress-bar">
+    <div id="progress"></div>
+  </div>
+  <!-- Checkpoints outside the progress bar -->
+  <div id="checkpoint1" class="checkpoint"></div>
+  <div id="checkpoint2" class="checkpoint"></div>
+
+  <script>
+    var width = 0; // Define width outside of the function
+    var interval; // Declare interval globally for better control
+
+    function startProgressBar() {
+      var totalTime = parseInt(document.getElementById('total-time').value);
+      var progressBar = document.getElementById('progress');
+      var checkpoint1 = document.getElementById('checkpoint1');
+      var checkpoint2 = document.getElementById('checkpoint2');
+      var increment = 100 / totalTime; // Calculate increment for each second
+
+      interval = setInterval(timerFunction, 1000); // Start the timer immediately
+
+      function timerFunction() {
+        if (width >= 100) {
+          clearInterval(interval);
+        } else {
+          width += increment; // Increment width
+          progressBar.style.width = width + '%';
+          console.log('width:', width);
+          // Check if reached the first checkpoint
+          if (width >= 33 && !checkpoint1.triggered) {
+            clearInterval(interval); // Pause the timer
+            checkpoint1.triggered = true; // Mark the checkpoint as triggered
+            showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+          }
+
+          // Check if reached the second checkpoint
+          if (width >= 66 && !checkpoint2.triggered) {
+            clearInterval(interval); // Pause the timer
+            checkpoint2.triggered = true; // Mark the checkpoint as triggered
+            showCheckpointAlert('Are you okay at second checkpoint?');
+          }
+        }
+      }
+
+      function showCheckpointAlert(message, nextCheckpoint) {
         Swal.fire({
-          title: 'Take a break!',
-          text: 'Feel free to resume when you are ready.',
-          icon: 'info',
-          timer: 3000 // 3 seconds timeout
+          title: message,
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, I\'m okay',
+          cancelButtonText: 'No, I need a break',
+          timer: 60000, // 60 seconds timeout (1 minute)
+          allowOutsideClick: false,
+          timerProgressBar: true, // Disable timer progress bar
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // If confirmed, resume the timer
+            interval = setInterval(timerFunction, 1000);
+          } else {
+            // If user cancels or doesn't respond, show alert
+            Swal.fire({
+              title: 'Take a break!',
+              text: 'Feel free to resume when you are ready.',
+              icon: 'info',
+              timer: 3000 // 3 seconds timeout
+            });
+          }
         });
       }
-    });
-  }
-}
+    }
 
 
 
-</script>
+  </script>
 </body>
+
 </html>
