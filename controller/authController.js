@@ -43,9 +43,8 @@ const handleLogIn = async (req, res) => {
             return res.json({ success: false, user: false })
         }
         const passwordMatch = await bcrypt.compare(password, user.password);
-
         if (passwordMatch) {
-            console.log("fasjdklfhkajshdjfhajshdfhjakshdjlfhkash")
+            req.session.user_id = user._id;
             res.json({ success: true })
         } else {
             res.json({ success: false, user: true });
@@ -80,7 +79,8 @@ const handleSingUp = async (req, res) => {
                         emgNum1,
                         emgNum2
                     ],
-                    password: hashedPassword
+                    password: hashedPassword,
+                    isVerified:true
                 }
             },
             { upsert: true,new: true, }

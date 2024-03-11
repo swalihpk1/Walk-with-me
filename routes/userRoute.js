@@ -26,6 +26,7 @@ userRoutes.post('/signup',authMiddleware.isLogout,authController.handleSingUp);
 userRoutes.post('/verifyOtp',authController.verifyOtp);
 userRoutes.get('/safetymap', mapController.safetyMap);
 userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
+userRoutes.post('/sendwhatsAppMessages',alertController.sendMessages)
 userRoutes.get('/otp',authController.loadOtpPage);
 userRoutes.get('/check-point',userMessageController.reachCheckPoint);
 
