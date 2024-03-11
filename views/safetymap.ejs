@@ -3,17 +3,18 @@
 
     <body class="p-0">
             <main>
-                <div id="map-container" class="position-relative">
-                    <button class="btn stopBtn rounded-pill">Stop</button>
-                    <div id="googleMap"></div>
-                </div>
-            
+            <div id="map-container" class="position-relative">
+                <button class="btn stopBtn rounded-pill shadow-lg"><a href="/safetymap"
+                        style="text-decoration: none; color: inherit;">Stop</a></button>
+                <div id="googleMap"></div>
+            </div>
+
                 <div id="output" class="position-absolute bottom-0 start-50 translate-middle-x">
                     <div id="gradient-box" class="gradient-box">
                         <p class="text-center touchTxt">Touch your destination</p>
                         <div class="d-flex justify-content-center mt-3">
                             <button class="btn rounded-pill text-white border-0 mr-2" id="start-btn"
-                                onclick="calcRoute();">Start</button>
+                                onclick="calcRoute();">Estimate route</button>
                         </div>
                     </div>
                 </div>
@@ -26,8 +27,8 @@
                         <div class="card rounded border-0 p-4">
                             <p class="card-title">How much time will it take to reach your destination?</p>
                             <input type="number" id="dropdown-number" class="form-control mb-3" placeholder="in minutes">
-                            <button class="btn btn-primary text-white" style="background-color: rgb(127 81 187);"
-                                onclick="submitNumber()">Submit</button>
+                            <button class="btn btn-primary text-white submitBtn" style="background-color: rgb(127 81 187);"
+                                onclick="submitNumber()">Start</button>
                         </div>
                     </div>
                 </div>
@@ -36,9 +37,9 @@
                     <div id="progress-bar">
                         <div id="progress"></div>
                         <div class="label start-label">Start</div>
-                        <button class="btn rounded-pill text-white border-0 mr-2 pauseBtn" id="pause-btn"
+                        <button class="btn rounded text-white border-0 mr-2 pauseBtn" id="pause-btn"
                             onclick="pauseProgressBar()">Pause</button>
-                        <button class="btn rounded-pill text-white border-0 resumeBtn" id="resume-btn"
+                        <button class="btn rounded text-white border-0 resumeBtn" id="resume-btn"
                             onclick="resumeProgressBar()">Resume</button>
                         <div class="label end-label">End</div>
                     </div>
@@ -49,36 +50,12 @@
                 <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
             </main>
 
-            <!-- <script>
-                var interval; // Declare interval globally for better control
-                 // Flag to track if the progress is paused
-
-                function pauseProgressBar() {
-                    clearInterval(interval); // Stop the timer
-                    paused = true;
-                    document.getElementById('pause-btn').style.display = 'none';
-                    document.getElementById('resume-btn').style.display = 'block';
-                }
-
-                function resumeProgressBar() {
-                    paused = false;
-                    document.getElementById('pause-btn').style.display = 'block';
-                    document.getElementById('resume-btn').style.display = 'none'; // This line hides the resume button
-                    interval = setInterval(timerFunction, 1000); // Start the timer
-                }
-
-                function startProgressBar(number) {
-                    // Define the timer function
-                    function timerFunction() {
-                        if (!paused) {
-                            // Your existing code for the timerFunction
-                        }
-                    }
-
-                    // Start the timer
-                    interval = setInterval(timerFunction, 1000);
-                }
-            </script> -->
+            <script>
+               document.getElementById("submitBtn").addEventListener("click", function () {
+                    console.log("Start button clicked!");
+                    document.querySelector(".stopBtn").style.display = "block";
+                });
+            </script>
 
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
             <script

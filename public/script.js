@@ -19,23 +19,23 @@ function success(position) {
 
     console.log(`Your current location: Latitude: ${latitude}, Longitude: ${longitude}`);
 
-    // Define map options after getting the user's position
+
     mapOptions = {
         center: { lat: latitude, lng: longitude },
-        zoom: 17, // Adjust the zoom level as desired
+        zoom: 17,
         mapTypeId: google.maps.MapTypeId.TERRAIN
     };
 
-    // Create the map
+
     map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 
     var currentIcon = {
-        url: '/img/current-indicator.png', // Path to your custom icon image
-        scaledSize: new google.maps.Size(40, 40), // Size of the icon
+        url: '/img/current-indicator.png',
+        scaledSize: new google.maps.Size(40, 40),
     }
 
 
-    // Create a marker for the current location
+
     currMarker = new google.maps.Marker({
         position: { lat: latitude, lng: longitude },
         map: map,
@@ -44,12 +44,12 @@ function success(position) {
     });
 
 
-    // Add click listener to set destination on map click
+
     google.maps.event.addListener(map, 'click', function (event) {
         addPinMarker(event)
     });
 
-    // Add listener for touch events (for mobile devices)
+
     google.maps.event.addListener(map, 'touchend', function (event) {
         addPinMarker(event)
     });
@@ -61,8 +61,8 @@ function addPinMarker(event) {
     }
 
     var endIcon = {
-        url: '/img/end-indicator.png', // Path to your custom icon image
-        scaledSize: new google.maps.Size(30, 40), // Size of the icon
+        url: '/img/end-indicator.png', 
+        scaledSize: new google.maps.Size(30, 40), 
     }
 
     marker = new google.maps.Marker({
@@ -72,7 +72,7 @@ function addPinMarker(event) {
         icon: endIcon
     });
 
-    // Update destination input field with coordinates
+
     document.getElementById("to").value = event.latLng.lat() + ", " + event.latLng.lng();
 }
 
@@ -83,32 +83,32 @@ function error() {
 
 
 
-// Load the map when the window is fully loaded
+
 google.maps.event.addDomListener(window, 'load');
 
 var directionsDisplay = new google.maps.DirectionsRenderer();
 
 function calcRoute() {
-    // Show the stop button
+
     document.getElementById('start-btn').style.display = 'none';
 
-    // Create a DirectionsService object to use the route method and get a result for our request
+
     var directionsService = new google.maps.DirectionsService();
 
-    // Bind the DirectionsRenderer to the map
+
     if (!directionsDisplay.getMap()) {
         directionsDisplay.setMap(map);
     }
 
-    // Create request
+
     directionsDisplay.setOptions({
         polylineOptions: {
             strokeColor: 'rgb(128, 69, 185)',
-            strokeWeight: 10 // Change this to the desired thickness // Change this to the desired color
+            strokeWeight: 10 
         }
     });
 
-    // Get current position
+
     navigator.geolocation.getCurrentPosition((position) => {
         var request = {
             origin: document.getElementById("from").value || {
@@ -116,33 +116,33 @@ function calcRoute() {
                 lng: position.coords.longitude,
             },
             destination: document.getElementById("to").value,
-            travelMode: google.maps.TravelMode.WALKING, // WALKING, BYCYCLING, TRANSIT
+            travelMode: google.maps.TravelMode.WALKING,
             unitSystem: google.maps.UnitSystem.METRIC
         }
 
-        // Pass the request to the route method
+
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                // Get distance and time
+
                 const output = document.querySelector('#output');
                 output.innerHTML = "<div class='journeyDetails' style='text-align: left;'>" + "<span style='background-color: rgba(77, 9, 141, 0.8); color: white; border-radius: 20px; padding: 5px 10px; display: inline-block; margin-bottom: 10px;'>" + result.routes[0].legs[0].duration.text + "</span>  " + result.routes[0].legs[0].distance.text + "</div>";
 
                 directionsDisplay.setDirections({ routes: [] });
-                // Display route
+
                 directionsDisplay.setDirections(result);
-                startLiveTracking(); // Start live tracking after route calculation
-                startProgressBar(30); // Adjust the number of minutes as needed
+                startLiveTracking(); 
+                startProgressBar(30); 
                 setTimeout(function () {
                     $("#dropdown-container").removeClass("d-none");
                     $("#dimmer-overlay").removeClass("d-none");
                 }, 2000);
             } else {
-                // Delete route from map
+
                 directionsDisplay.setDirections({ routes: [] });
-                // Center map in London
+
                 map.setCenter(myLatLng);
 
-                // Show error message
+
                 output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
             }
         });
@@ -151,16 +151,16 @@ function calcRoute() {
 
 
 function submitNumber() {
-    // Handle the submitted number from the dropdown
+
     const number = $("#dropdown-number").val();
     console.log("Submitted number:", number);
     startProgressBar(number)
 
-    // Hide the dropdown and dimmer after submission
+
     $("#dropdown-container").addClass("d-none");
     $("#dimmer-overlay").addClass("d-none");
 
-    // Show the tracking content by sliding it from the bottom
+
     $("#tracking-content").css("bottom", "0");
     setTimeout(() => {
         startProgressBar(number)
@@ -170,7 +170,6 @@ function submitNumber() {
 
 
 
-//create autocomplete objects for all inputs
 var options = {
     types: ['(cities)']
 }
@@ -182,34 +181,34 @@ var input2 = document.getElementById("to");
 var autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 
 
-// Function to handle errors during positioning
+
 function error(err) {
     console.error(`Error obtaining your location: ${err.message}`);
 }
 
-var watchId; // Variable to store the watch position ID
+var watchId; 
 
-// Function to start live tracking
+
 function startLiveTracking() {
     if (navigator.geolocation) {
         watchId = navigator.geolocation.watchPosition(trackUser, error);
-        map.setZoom(47); // Adjust the zoom level as desired
+        map.setZoom(47);
     } else {
         console.log("Geolocation is not supported by your browser.");
     }
 }
 
-// Function to track user's position
+
 function trackUser(position) {
     console.log('position:', position);
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    // Update user marker position
+
     if (currMarker) {
         currMarker.setPosition({ lat: latitude, lng: longitude });
     } else {
-        // Create user marker if not already created
+
         marker = new google.maps.Marker({
             position: { lat: latitude, lng: longitude },
             map: map,
@@ -218,16 +217,16 @@ function trackUser(position) {
         });
     }
 
-    // Check if user has reached the destination
+
     const destination = document.getElementById("to").value;
     const distanceToDestination = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(latitude, longitude), destination);
     if (distanceToDestination < ARRIVAL_THRESHOLD) {
-        // User has reached the destination, stop tracking
+
         stopLiveTracking();
         alert('reached');
         console.log("You have reached your destination!");
     } else {
-        // Recalculate route and update output
+
         var request = {
             origin: { lat: latitude, lng: longitude },
             destination: destination,
@@ -238,15 +237,15 @@ function trackUser(position) {
         var directionsService = new google.maps.DirectionsService();
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
-                // Update distance and duration in the output
+
                 const output = document.querySelector('#output');
                 output.innerHTML = "<div class='journeyDetails'>" + "<br /><span style='background-color: rgba(77, 9, 141, 0.8); color: white; border-radius: 20px; padding: 5px 10px;'>" + result.routes[0].legs[0].distance.text + "</span>.<br /><span style='background-color: grey; color: magenta; border-radius: 20px; padding: 5px 10px;'>" + result.routes[0].legs[0].duration.text + "</span>.</div>";
 
                 directionsDisplay.setDirections({ routes: [] });
-                // Display updated route
+
                 directionsDisplay.setDirections(result);
             } else {
-                // Show error message
+
                 const output = document.querySelector('#output');
                 output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve walking distance.</div>";
             }
@@ -254,7 +253,6 @@ function trackUser(position) {
     }
 }
 
-// Function to stop live tracking
 function stopLiveTracking() {
     if (watchId) {
         navigator.geolocation.clearWatch(watchId);
@@ -262,27 +260,23 @@ function stopLiveTracking() {
     }
     document.getElementById('start-btn').style.display = 'block';
 
-    // Clear the directions displayed on the map
+
     directionsDisplay.setDirections({ routes: [] });
 
-    // Remove the destination marker from the map
+
     if (marker) {
         marker.setMap(null);
-        marker = undefined; // Reset marker variable
+        marker = undefined; 
     }
 }
 
-// Constants
-const ARRIVAL_THRESHOLD = 50; // Threshold distance (in meters) within which user is considered to have arrived
-
-// Example usage:
-
+const ARRIVAL_THRESHOLD = 50; 
 
 
 
 // --------------Progress Bar scripts-----------------
-var width = 0; // Define width outside of the function
-var interval; // Declare interval globally for better control
+var width = 0; 
+var interval; 
 var paused = false;
 
 function pauseProgressBar() {
@@ -294,8 +288,7 @@ function pauseProgressBar() {
 function resumeProgressBar() {
     paused = false;
     document.getElementById('pause-btn').style.display = 'block';
-    document.getElementById('resume-btn').style.display = 'none'; // This line hides the resume button
-     // Start the timer
+    document.getElementById('resume-btn').style.display = 'none';
 }
 
 function startProgressBar(number) {
@@ -303,34 +296,48 @@ function startProgressBar(number) {
     var progressBar = document.getElementById('progress');
     var checkpoint1 = document.getElementById('checkpoint1');
     var checkpoint2 = document.getElementById('checkpoint2');
-    var increment = 100 / totalTime; // Calculate increment for each second
+    var increment = 100 / totalTime; 
 
-    interval = setInterval(timerFunction, 1000); // Start the timer immediately
+    interval = setInterval(timerFunction, 1000); 
 
     function timerFunction() {
-        if (!paused) { // Check if the progress bar is not paused
-          if (width >= 100) {
-            clearInterval(interval);
-          } else {
-            width += increment; // Increment width
-            progressBar.style.width = width + '%';
-            console.log('width:',width);
-            // Check if reached the first checkpoint
-            if (width >= 33 && !checkpoint1.triggered) {
-              clearInterval(interval); // Pause the timer
-              checkpoint1.triggered = true; // Mark the checkpoint as triggered
-              showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+        if (!paused) { 
+            if (width >= 100) {
+                clearInterval(interval);
+
+                Swal.fire({
+                    title: 'Journey Completed!',
+                    text: 'Your journey has been successfully completed. You are so Courageous!',
+                    icon: 'success',
+                    timer: 3000,
+                    onClose: () => {
+
+                        window.location.href = "/";
+                    }
+                });
+
+            } else {
+                width += increment; 
+                progressBar.style.width = width + '%';
+                console.log('width:', width);
+              
+                if (width >= 33 && !checkpoint1.triggered) {
+                    clearInterval(interval); 
+                    checkpoint1.triggered = true; 
+                    showCheckpointAlert('Are you okay at first checkpoint?', checkpoint2);
+                }
+
+
+                if (width >= 66 && !checkpoint2.triggered) {
+                    clearInterval(interval);
+                    checkpoint2.triggered = true; 
+                    showCheckpointAlert('Are you okay at second checkpoint?');
+                }
             }
-    
-            // Check if reached the second checkpoint
-            if (width >= 66 && !checkpoint2.triggered) {
-              clearInterval(interval); // Pause the timer
-              checkpoint2.triggered = true; // Mark the checkpoint as triggered
-              showCheckpointAlert('Are you okay at second checkpoint?');
-            }
-          }
         }
-      }
+    }
+
+
 
     async function showCheckpointAlert(message, nextCheckpoint) {
         let response = await fetch('check-point', {
@@ -344,13 +351,13 @@ function startProgressBar(number) {
             showCancelButton: true,
             confirmButtonText: 'Yes, I\'m cool',
             cancelButtonText: 'No, feeling fishy',
-            timer: 60000, // 60 seconds timeout (1 minute)
+            timer: 60000, 
             allowOutsideClick: false,
-            timerProgressBar: true, // Disable timer progress bar
-            cancelButtonClass: 'bg-danger' // Add custom class to cancel button
+            timerProgressBar: true,
+            cancelButtonClass: 'bg-danger' 
         }).then((result) => {
             if (result.isConfirmed) {
-                // If confirmed, resume the timer
+
                 interval = setInterval(timerFunction, 1000);
             } else {
                 Swal.fire({
@@ -358,11 +365,11 @@ function startProgressBar(number) {
                     text: 'So, we are forwarding alert to your relatives',
                     icon: 'warning',
                     confirmButtonText: 'Yes, hurry up!',
-                    showConfirmButton: true, // Ensure the OK button is shown
+                    showConfirmButton: true, 
                     showCancelButton: true,
                     cancelButtonText: "Nop it's ok",
-                    allowOutsideClick: false, // Prevent closing by clicking outside the modal
-                    allowEscapeKey: false // Prevent closing by pressing Esc key
+                    allowOutsideClick: false,
+                    allowEscapeKey: false 
                 }).then(async (result) => {
                     if (result.isConfirmed) {
                         

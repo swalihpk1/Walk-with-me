@@ -1,10 +1,10 @@
 const isLogin = (req, res,next) => {
     try {
-        if (req.session.user_id) {
+        // if (req.session.user_id) {
             next();
-        } else {
-            return res.redirect('/login')
-        }
+        // } else {
+        //     return res.redirect('/login')
+        // }
     } catch (error) {
         console.log("error on isLogin middleware",error)
     }
@@ -12,10 +12,10 @@ const isLogin = (req, res,next) => {
 
 const isLogout = (req, res,next) => {
     try {
-        if (!req.session.user_id) {
+        // if (!req.session.user_id) {
             return next()
-        }
-        return res.redirect('/')
+        // }
+        // return res.redirect('/')
     } catch (error) {
         console.log("error on isLogout middleware :", error)
         console.log(error.message)
