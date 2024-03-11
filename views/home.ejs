@@ -28,8 +28,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
-        window.addEventListener('load', function () {
-            document.querySelector('.homeQoute').classList.add('show');
+      window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.querySelector('.homeQoute').classList.add('show');
+            }, 2000); // Delaying the transition start by 2000 milliseconds (2 seconds)
         });
 
         document.getElementById('button1').addEventListener('click', function () {
@@ -40,7 +42,6 @@
                 window.location.href = '/safetymap';
             }, 1300);
         });
-
 
         $(window).on('load', function () {
             setTimeout(function () {

@@ -116,8 +116,11 @@ body {
     width: 22rem;
     left: 50%;
     transform: translateX(-50%);
-    opacity: 0;
     transition: all 0.9s ease-in-out;
+}
+
+.show {
+    opacity: 1;
 }
 
 #start-btn {
