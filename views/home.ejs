@@ -8,7 +8,7 @@
         </div>
         <div class="section-1 text-center">
             <div class="container-fluid section-1-main pt-4">
-                <!-- Your content here -->
+
             </div>
             <div class="start-button mt-4">
                 <button class="button-1" id="button1">
@@ -31,7 +31,7 @@
         window.addEventListener('load', function () {
             setTimeout(function () {
                 document.querySelector('.homeQoute').classList.add('show');
-            }, 2000); // Delaying the transition start by 2000 milliseconds (2 seconds)
+            }, 2000); 
         });
 
         document.getElementById('button1').addEventListener('click', function () {
@@ -56,11 +56,11 @@
                 text: 'We need your location to provide accurate information.',
                 icon: 'info',
                 showConfirmButton: false,
-                timer: 4000 // Automatically dismiss after 3 seconds
+                timer: 4000 
             });
         }
 
-        // Call the function after 3 seconds of page load
+
         window.addEventListener('load', function () {
             setTimeout(displayLocationPopup, 3000);
         });

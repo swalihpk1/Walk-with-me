@@ -14,7 +14,7 @@
                         <p class="text-center touchTxt">Touch your destination</p>
                         <div class="d-flex justify-content-center mt-3">
                             <button class="btn rounded-pill text-white border-0 mr-2" id="start-btn"
-                                onclick="calcRoute();">Start</button>
+                                onclick="calcRoute();">Estimate route</button>
                         </div>
                     </div>
                 </div>
@@ -27,8 +27,8 @@
                         <div class="card rounded border-0 p-4">
                             <p class="card-title">How much time will it take to reach your destination?</p>
                             <input type="number" id="dropdown-number" class="form-control mb-3" placeholder="in minutes">
-                            <button class="btn btn-primary text-white" style="background-color: rgb(127 81 187);"
-                                onclick="submitNumber()">Submit</button>
+                            <button class="btn btn-primary text-white submitBtn" style="background-color: rgb(127 81 187);"
+                                onclick="submitNumber()">Start</button>
                         </div>
                     </div>
                 </div>
@@ -49,6 +49,13 @@
             
                 <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
             </main>
+
+            <script>
+               document.getElementById("submitBtn").addEventListener("click", function () {
+                    console.log("Start button clicked!");
+                    document.querySelector(".stopBtn").style.display = "block";
+                });
+            </script>
 
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
             <script
