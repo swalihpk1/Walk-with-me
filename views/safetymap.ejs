@@ -50,37 +50,6 @@
                 <div id="dimmer-overlay" class="dimmer-overlay d-none"></div>
             </main>
 
-            <script>
-                var interval; // Declare interval globally for better control
-                var paused = false; // Flag to track if the progress is paused
-
-                function pauseProgressBar() {
-                    clearInterval(interval); // Stop the timer
-                    paused = true;
-                    document.getElementById('pause-btn').style.display = 'none';
-                    document.getElementById('resume-btn').style.display = 'block';
-                }
-
-                function resumeProgressBar() {
-                    paused = false;
-                    document.getElementById('pause-btn').style.display = 'block';
-                    document.getElementById('resume-btn').style.display = 'none'; // This line hides the resume button
-                    interval = setInterval(timerFunction, 1000); // Start the timer
-                }
-
-                function startProgressBar(number) {
-                    // Define the timer function
-                    function timerFunction() {
-                        if (!paused) {
-                            // Your existing code for the timerFunction
-                        }
-                    }
-
-                    // Start the timer
-                    interval = setInterval(timerFunction, 1000);
-                }
-            </script>
-
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
             <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_UNyyeu7K7g6VmxMlOJFBx1vGT0Igbmo&libraries=places"></script>
