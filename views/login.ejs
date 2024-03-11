@@ -8,11 +8,13 @@
             <form id="registrationForm">
               <div class="form-group mb-3">
                 <label for="Mobile">Mobile</label>
-                <input type="number" class="form-control" id="Mobile" name="Mobile" required>
+                <input type="number" class="form-control" id="Mobile" name="mobile" required>
+                <p id="mobile_msg"></p>
               </div>
               <div class="form-group mb-3">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
+                <p id="password_msg"></p>
               </div>
               <div class="text-center"> <!-- Add text-center class here -->
                 <button type="submit" class="btn btn-primary btn-block">Log in</button>
@@ -26,4 +28,53 @@
       </div>
     </div>
   </main>
+  <script>
+    let form = document.getElementById('registrationForm');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      let mobile = document.getElementById('Mobile').value;
+      let password = document.getElementById('password').value;
+      let password_msg = document.getElementById('password_msg');
+      let mobile_msg = document.getElementById('mobile_msg');
+      let validate = true;
+      if (mobile.trim() == '') {
+        mobile_msg.textContent = "mobile is required*";
+        mobile_msg.style.display = 'block';
+        validate = false;
+      }
+      if (password.trim() == "") {
+        password_msg.textContent = 'password is required*';
+        password_msg.style.display = 'block';
+        validate = false;
+      }
+      if (validate) {
+        try {
+          let data = await fetch('/login', {
+            method: "POST",
+            headers: {
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+              mobile: mobile,
+              password: password
+            })
+          });
+          let response = await data.json();
+          console.log(response)
+          if (!response.success && !response.user) {
+            mobile_msg.textContent = "No user found on number";
+            mobile_msg.style.display = 'block';
+          } else if (!response.success && response.user) {
+            password_msg.textContent = "password Incorrect";
+            password_msg.style.display = 'block'
+          } else {
+            window.location.href = '/';
+          }
+        }catch(error){
+          console.log("error on fetch calling :",error)
+        }
+      }
+    })
+
+  </script>
   <%- include('./layouts/footer') -%>
