@@ -348,9 +348,15 @@ function startProgressBar(number) {
 
 
 
-    function showCheckpointAlert(message, nextCheckpoint) {
+    async function showCheckpointAlert(message, nextCheckpoint) {
+        let response = await fetch('check-point', {
+            method: 'GET'
+        });
+        let data = await response.json();
+        console.log(data.quote.quote)
         Swal.fire({
             title: message,
+            text: data.quote.quote,
             showCancelButton: true,
             confirmButtonText: 'Yes, I\'m cool',
             cancelButtonText: 'No, feeling fishy',
@@ -373,10 +379,31 @@ function startProgressBar(number) {
                     cancelButtonText: "Nop it's ok",
                     allowOutsideClick: false, // Prevent closing by clicking outside the modal
                     allowEscapeKey: false // Prevent closing by pressing Esc key
-                }).then((result) => {
+                }).then(async (result) => {
                     if (result.isConfirmed) {
-                        // If confirmed, resume the timer
-
+                        let message = `🚨 URGENT ALERT:🚨  \n    
+                        We hope you're well.  We're reaching out because your friend hasn't responded to our recent messages, and we want to ensure her safety.
+                        
+                        For your information:
+                        - Last Known Location: https://www.google.com/maps/dir//11.1895,75.8698/@11.1895,75.8698,15z/data=!4m2!4m1!3e2?entry=ttu 
+                        
+                        We kindly ask for your assistance in checking on her to make sure she is not in any danger. If possible, please try reaching out to her or physically check her location.
+                        `;
+                    
+                    try {
+                        let response = await fetch('/sendwhatsAppMessages', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                message: message,
+                            }),
+                        });
+                        await response.json();
+                    }catch(error){
+                        console.log(error,"error fetching")
+                    }
                     } else {
                         interval = setInterval(timerFunction, 1000);
                     }
