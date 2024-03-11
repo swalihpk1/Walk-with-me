@@ -24,11 +24,11 @@ userRoutes.get('/loder',authMiddleware.isLogin,authController.loder);
 userRoutes.get('/signup',authMiddleware.isLogout,authController.loadSignup);
 userRoutes.post('/signup',authMiddleware.isLogout,authController.handleSingUp);
 userRoutes.post('/verifyOtp',authController.verifyOtp);
-userRoutes.get('/safetymap', mapController.safetyMap);
-userRoutes.post('/sendAlertMessages', alertController.sendAlertMessages);
-userRoutes.post('/sendwhatsAppMessages',alertController.sendMessages)
-userRoutes.get('/otp',authController.loadOtpPage);
-userRoutes.get('/check-point',userMessageController.reachCheckPoint);
+userRoutes.get('/safetymap',authMiddleware.isLogin, mapController.safetyMap);
+userRoutes.post('/sendAlertMessages',authMiddleware.isLogin, alertController.sendAlertMessages);
+userRoutes.post('/sendwhatsAppMessages',authMiddleware.isLogin,alertController.sendMessages)
+userRoutes.get('/otp',authMiddleware.isLogout,authController.loadOtpPage);
+userRoutes.get('/check-point',authMiddleware.isLogin,userMessageController.reachCheckPoint);
 
 
 
