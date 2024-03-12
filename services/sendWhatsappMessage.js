@@ -9,13 +9,13 @@ const sendWhatsappMessage = (phoneNumber, message) => {
             'headers': {
             },
             formData: {
-              'appkey': 'd5548137-a4c4-450d-9a89-aefb651e3c59',
-              'authkey': 'JkIXGU5wChWuPotlxVksNXMJmshdlHX3ZlLAJJYa3Xs77tPUcF',
-              'to':phoneNumber,
-              'message': message
+                'appkey': '17481907-51c0-485b-b0f3-11f4f414c1ee',
+                'authkey': '4WS10LKGqfq7efxHK3buYg1f50vE3JvHs4nvrjuR0dpn9o3eYl',
+                'to': phoneNumber,
+                'message': message
             }
-          };
-        console.log(phoneNumber,message)
+        };
+        console.log(phoneNumber, message)
 
         request(options, function (error, response) {
             if (error) {
