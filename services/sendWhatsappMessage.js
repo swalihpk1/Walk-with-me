@@ -11,8 +11,8 @@ const sendWhatsappMessage = (phoneNumber, message) => {
           formData: {
          'appkey': 'dd0de7c2-575e-458b-b3b6-a7c6985c5dca',
          'authkey': 'yZWhAmnpu2sJAYw8FYtWB5BBEmKtr5YmGrh12ldXsTEaHEDPCc',
-         'to': 'RECEIVER_NUMBER',
-         'message': 'Example message'
+         'to': phoneNumber,
+         'message': message
   }
 };
         console.log(phoneNumber,message)
