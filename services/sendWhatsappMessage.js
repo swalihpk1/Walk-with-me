@@ -9,9 +9,9 @@ const sendWhatsappMessage = (phoneNumber, message) => {
             'headers': {
             },
             formData: {
-              'appkey': '19639dad-ed9a-443d-99b8-109214637982',
-              'authkey': 't776EID8ysP7Lyj0JuIqWUbrGuoDARPCzsNcQHRxHRqHXehxfd',
-              'to': phoneNumber,
+              'appkey': 'd5548137-a4c4-450d-9a89-aefb651e3c59',
+              'authkey': 'JkIXGU5wChWuPotlxVksNXMJmshdlHX3ZlLAJJYa3Xs77tPUcF',
+              'to':phoneNumber,
               'message': message
             }
           };

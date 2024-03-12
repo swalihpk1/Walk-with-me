@@ -20,7 +20,7 @@ const sendMessages = async (req, res) => {
         console.log(user, "user");
         if (user && user.emergency_contacts && user.emergency_contacts.length > 0) {
             for (let contact of user.emergency_contacts) {
-                await sendWhatsappMessage(contact, message);
+                await sendWhatsappMessage(`91${contact}`, message);
             }
             res.json({ message: 'ok' });
         } else {
